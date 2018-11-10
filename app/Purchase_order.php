@@ -10,7 +10,7 @@ class Purchase_order extends Model
     protected $table='purchase_orders';
 
     public function supplier(){
-    	return $this->hasMany("App\Supplier"), "supplier_id","supplier_id");
+    	return $this->hasMany("App\Supplier", "supplier_id","supplier_id");
     }
 
 }

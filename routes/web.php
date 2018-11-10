@@ -19,8 +19,12 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'supplier'], function(){
 		Route::get('list', 'SupplierController@getList');
 		Route::get('add', 'SupplierController@getAdd');
-		Route::get('update', 'SupplierController@getUpdate');
-
 		Route::post('add','SupplierController@postAdd' );
+
+		Route::get('update/{id}', 'SupplierController@getUpdate');
+		Route::post('update/{id}', 'SupplierController@postUpdate');
+
+		Route::get('delete/{id}', 'SupplierController@getDelete');
+		
 	});
 });

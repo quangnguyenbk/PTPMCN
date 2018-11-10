@@ -11,6 +11,6 @@ class Supplier extends Model
 
     public function purchase_orders()
     {
-    	return $this->hasMany('App\Purchase_order', 'supplier_id','supplier_id');
+    	return $this->hasOne('App\Purchase_order', 'supplier_id','supplier_id');
     }
 }

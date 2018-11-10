@@ -5,6 +5,19 @@
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
+                @if(count($errors) > 0)
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $err)
+                            {{$err}}<br>
+                            @endforeach
+                        </div>
+                        @endif
+
+                        @if(session('thongbao'))
+                        <div class="alert alert-success">
+                            {{session('thongbao')}}
+                        </div>
+                        @endif
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Nhà cung cấp
@@ -30,7 +43,7 @@
                         <tbody>
                             @foreach($suppliers as $item)
                             <tr class="odd gradeX" align="center">
-                                <td>{{$item->supplier_id}}</td>
+                                <td>{{$item->id}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->tax_id}}</td>
                                 <td>{{$item->address}}</td>
@@ -38,8 +51,8 @@
                                 <td>{{$item->phone}}</td>
                                 <td>{{$item->status}}</td>
                                 <td>{{$item->comment}}</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/supplier/delete"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/supplier/update">Edit</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/supplier/delete/{{$item->id}}">Delete</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/supplier/update/{{$item->id}}">Edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>
