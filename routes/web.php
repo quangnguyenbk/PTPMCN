@@ -27,4 +27,13 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::get('delete/{id}', 'SupplierController@getDelete');
 		
 	});
+    Route::group(['prefix'=>'purchaseorder'], function(){
+        Route::get('list','PurchaseOrderController@getList');
+        Route::get('add', 'SupplierController@getAdd');
+        Route::get('update', 'SupplierController@getUpdate');
+        Route::post('add','SupplierController@postAdd' );
+    });
+    Route::group(['prefix'=>'purchaseorderitem'], function(){
+        Route::get('detail/{id}','PurchaseOrderItemController@getItems');
+    });
 });
