@@ -36,4 +36,17 @@ Route::group(['prefix'=>'admin'], function(){
     Route::group(['prefix'=>'purchaseorderitem'], function(){
         Route::get('detail/{id}','PurchaseOrderItemController@getItems');
     });
+    Route::group(['prefix'=>'sales_order'], function(){
+        Route::get('list', 'SalesOrderController@getList');
+        Route::get('detail/{id}', 'SalesOrderController@getDetail');
+        Route::get('add', 'SalesOrderController@getAdd');
+        Route::get('edit_detail_order/{id}', 'SalesOrderController@getEditDetailOrder');
+
+        Route::post('add','SalesOrderController@postAdd' );
+        Route::post('edit_detail_order/{id}', 'SalesOrderController@postEditDetailOrder');
+    });
+
+});
+Route::get('/clear-cache', function() {
+    return Artisan::call('cache:clear');
 });
