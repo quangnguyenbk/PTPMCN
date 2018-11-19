@@ -42,18 +42,20 @@ class PurchaseOrderController extends Controller
         $purchaseorders->tax = $request->tax;
         $purchaseorders->author = 1;
         $purchaseorders->comment = $request->comment_purchaseoders;
+
         $purchaseorders->save();
-        $id_max= DB::table('purchase_orders')->where('id', DB::raw("(select max(`id`) from purchase_orders)"))->get();
-        $id=$id_max[0]->id;
-        if($request->product_id){
-        for($i=0;$i<count($request->product_id);$i++){
-            $purchaseorder_item = new Purchase_order_item();
-            $purchaseorder_item->purchase_order_id=$id;
-            $purchaseorder_item->product_id=(int)$request->product_id[$i];
-            $purchaseorder_item->price=$request->price[$i];
-            $purchaseorder_item->comment=$request->comment[$i];
-            $purchaseorder_item->save();
-        }
+        $id_max = DB::table('purchase_orders')->where('id', DB::raw("(select max(`id`) from purchase_orders)"))->get();
+        $id = $id_max[0]->id;
+        if($request->product_id) {
+            for ($i = 0; $i < count($request->product_id); $i++) {
+                $purchaseorder_item = new Purchase_order_item();
+                $purchaseorder_item->purchase_order_id = $id;
+                $purchaseorder_item->product_id = (int)$request->product_id[$i];
+                $purchaseorder_item->price = $request->price[$i];
+                $purchaseorder_item->quantity = $request->quantity[$i];
+                $purchaseorder_item->comment = $request->comment[$i];
+                $purchaseorder_item->save();
+            }
         }
         return redirect('admin/purchaseorderitem/detail/'.$id)->with('thongbao', 'Thêm thành công');
 

@@ -94,6 +94,7 @@
                         '<option value="<?= $product->id ?>">Tên: <?= $product->laptop_name ?></option>'+
                     '<?php endforeach;?>'+
                     '</select>' +
+                    '<label > Số lượng</label><input class="prod" name="quantity[]" placeholder="Số lượng nhập">'+
                     '<label > Đơn giá </label><input class="prod" name="price[]" placeholder="Đơn giá">'+
                     '<label>Mô tả:</label><textarea class="form-control" rows="3" name="comment[]"></textarea></label></div><p></p>');
             });

@@ -21,8 +21,8 @@
                         <th>Tiền</th>
                         <th>Ghi chú</th>
                         <th>Trạng thái</th>
-                        <th>Trả lại</th>
-                        <th>Tiền trả lại</th>
+                        <th>Số lượng</th>
+                        <th>Số lượng trả lại</th>
                         <th>Lí do</th>
                         <th>Sửa</th>
                     </tr>
