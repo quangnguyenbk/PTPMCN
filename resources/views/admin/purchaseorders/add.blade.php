@@ -6,6 +6,19 @@
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
+            @if(count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $err)
+                        {{$err}}<br>
+                    @endforeach
+                </div>
+            @endif
+
+            @if(session('thongbao'))
+                <div class="alert alert-success">
+                    {{session('thongbao')}}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Đơn hàng nhập
@@ -95,7 +108,7 @@
                     '<?php endforeach;?>'+
                     '</select>' +
                     '<label > Số lượng</label><input class="prod" name="quantity[]" placeholder="Số lượng nhập">'+
-                    '<label > Đơn giá </label><input class="prod" name="price[]" placeholder="Đơn giá">'+
+                    '<label > Đơn giá </label><input class="prod" name="price[]" placeholder="Đơn giá"><br>'+
                     '<label>Mô tả:</label><textarea class="form-control" rows="3" name="comment[]"></textarea></label></div><p></p>');
             });
             $("#xoasp").click(function(){
