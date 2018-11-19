@@ -39,11 +39,11 @@
                         </div>
                         <div class="form-group">
                             <label>Mã số thuế</label>
-                            <input class="form-control" name="address" placeholder="Mã số thuế" />
+                            <input class="form-control" name="tax" placeholder="Mã số thuế" />
                         </div>
                         <div class="form-group">
                             <label>Mô tả</label>
-                            <textarea class="form-control" rows="3" name="comment"></textarea>
+                            <textarea class="form-control" rows="3" name="comment_purchaseoders"></textarea>
                         </div>
 
                         <label>Chi tiết đơn hàng :</label>
@@ -53,6 +53,7 @@
                             <label id="themsp" class="btn btn-default">+</label>
                             <label id="xoasp" class="btn btn-default">-</label>
                         </div>
+                        <div><p></p></div>
                         <div id="detailproduct">
 
                         </div>
@@ -68,21 +69,33 @@
         <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
-
+<style>
+    body{
+        width: 120%;
+    }
+    .prod{
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+    .product_id{
+        height: 24px;
+    }
+</style>
 @endsection
 @section('script')
     <script>
         $(document).ready(function() {
             $('#themsp').click(function () {
-                $('#detailproduct').append('<div id="product" class="productdetail" name="productdetail"><input type="checkbox" name="record"><label>Sản phẩm</label>' +
-                    '<select name="product_id[]">' +
+                $('#detailproduct').append('<div id="product" class="productdetail" name="productdetail"><input type="checkbox" name="record"><label>Sản phẩm: </label>' +
+                    '<select class="product_id prod" name="product_id[]">' +
                     '<?php foreach ($products as $product) :?>'+
                         '<option value="<?= $product->id ?>">Tên: <?= $product->laptop_name ?></option>'+
                     '<?php endforeach;?>'+
                     '</select>' +
-                    '<label>Số lượng:</label><input name="soLuong[]" placeholder="Số lượng">'+
-                    '<label>Số lượng trả lại:</label><input name="soLuongTraLai[]" placeholder="Số lượng trả lại"><br>' +
-                    '<label>Lý do</label><textarea class="form-control" rows="3" name="lydo[]"></textarea></label></div><p></p>');
+                    '<label > Đơn giá </label><input class="prod" name="price[]" placeholder="Đơn giá">'+
+                    '<label>Mô tả:</label><textarea class="form-control" rows="3" name="comment[]"></textarea></label></div><p></p>');
             });
             $("#xoasp").click(function(){
                 $("#detailproduct").find('input[name="record"]').each(function(){

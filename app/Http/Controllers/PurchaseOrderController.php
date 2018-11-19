@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Laptop;
+use App\Purchase_order_item;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Purchase_order;
@@ -28,28 +29,34 @@ class PurchaseOrderController extends Controller
     }
 
     public function postAdd( Request $request){
-//        $this->validate($request,
-//            [
-//                'name' => 'required|min:3|max:100'
-//            ],
-//            [
-//                'name.required' => 'Bạn chưa nhập tên nhà cung cấp',
-//                'name.min' => 'Tên nhà cung cấp phải có độ dài từ 3 đến 100 kí tự',
-//                'name.max' => 'Tên nhà cung cấp phải có độ dài từ 3 đến 100 kí tự',
-//            ]);
-//        $purchaseorders = new Purchaseorders;
-//        $purchaseorders->name = $request->name;
-//        $purchaseorders->tax_id = $request->tax_id;
-//        $purchaseorders->address = $request->address;
-//        $purchaseorders->phone = $request->phone;
-//        $supplier->email = $request->email;
-//        $supplier->comment = $request->comment;
-//        $supplier->status = "mới tạo";
-//        $supplier->save();
-        echo "<pre>";
-            var_dump($request->post());
 
-        //return redirect('admin/supplier/add')->with('thongbao', 'Thêm thành công');
+        $this->validate($request,
+            [
+                'tax' => 'required'
+            ],
+            [
+                'name.required' => 'Bạn chưa nhập mã số thuế'
+            ]);
+        $purchaseorders = new Purchase_order();
+        $purchaseorders->supplier_id = $request->supplier;
+        $purchaseorders->tax = $request->tax;
+        $purchaseorders->author = 1;
+        $purchaseorders->comment = $request->comment_purchaseoders;
+        $purchaseorders->save();
+        $id_max= DB::table('purchase_orders')->where('id', DB::raw("(select max(`id`) from purchase_orders)"))->get();
+        $id=$id_max[0]->id;
+        if($request->product_id){
+        for($i=0;$i<count($request->product_id);$i++){
+            $purchaseorder_item = new Purchase_order_item();
+            $purchaseorder_item->purchase_order_id=$id;
+            $purchaseorder_item->product_id=(int)$request->product_id[$i];
+            $purchaseorder_item->price=$request->price[$i];
+            $purchaseorder_item->comment=$request->comment[$i];
+            $purchaseorder_item->save();
+        }
+        }
+        return redirect('admin/purchaseorderitem/detail/'.$id)->with('thongbao', 'Thêm thành công');
+
     }
 
 //    public function getUpdate(){
