@@ -65,9 +65,8 @@
                 responsive: true
         });
     });
-
-    @yield('script');
     </script>
+    @yield('script');
 </body>
 
 </html>

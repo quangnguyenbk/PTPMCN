@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Laptop;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Purchase_order;
@@ -22,10 +23,11 @@ class PurchaseOrderController extends Controller
     public function getAdd(){
         $suppliers = Supplier::all();
         //$arthour =
-        return view('admin.purchaseorders.add',['suppliers'=>$suppliers]);
+        $products= Laptop::all();
+        return view('admin.purchaseorders.add',['suppliers'=>$suppliers,'products'=>$products]);
     }
 
-//    public function postAdd( Request $request){
+    public function postAdd( Request $request){
 //        $this->validate($request,
 //            [
 //                'name' => 'required|min:3|max:100'
@@ -44,9 +46,11 @@ class PurchaseOrderController extends Controller
 //        $supplier->comment = $request->comment;
 //        $supplier->status = "mới tạo";
 //        $supplier->save();
-//
-//        return redirect('admin/supplier/add')->with('thongbao', 'Thêm thành công');
-//    }
+        echo "<pre>";
+            var_dump($request->post());
+
+        //return redirect('admin/supplier/add')->with('thongbao', 'Thêm thành công');
+    }
 
 //    public function getUpdate(){
 //
