@@ -28,13 +28,13 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-cube fa-fw"></i>Purchase order<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-cube fa-fw"></i>Hóa đơn nhập<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin/purchaseorder/list">List Purchase order</a>
+                                    <a href="admin/purchaseorders/list">Danh sách</a>
                                 </li>
                                 <li>
-                                    <a href="#">Add Purchase order</a>
+                                    <a href="admin/purchaseorders/add">Thêm</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

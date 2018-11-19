@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Purchase_order;
+use App\Supplier;
+//use App\
 class PurchaseOrderController extends Controller
 {
     public function getList(){
@@ -17,9 +19,11 @@ class PurchaseOrderController extends Controller
         return view('admin.purchaseorders.list', ['listOrders' => $listOrders]);
     }
 
-//    public function getAdd(){
-//        return view('admin.purchaseorders.add');
-//    }
+    public function getAdd(){
+        $suppliers = Supplier::all();
+        //$arthour =
+        return view('admin.purchaseorders.add',['suppliers'=>$suppliers]);
+    }
 
 //    public function postAdd( Request $request){
 //        $this->validate($request,

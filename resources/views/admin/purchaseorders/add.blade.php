@@ -27,32 +27,30 @@
                             {{session('thongbao')}}
                         </div>
                     @endif
-                    <form action="admin/purchaseorder/add" method="POST">
+                    <form action="admin/purchaseorders/add" method="POST">
                         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                         <div class="form-group">
                             <label>Tên nhà cung cấp</label>
-                            <input class="form-control" name="name" placeholder="Nhập tên nhà cung cấp" />
+                            <select class="form-control">
+                                <?php foreach ($suppliers as $supplier):?>
+                                <option value="<?= $supplier->id ?>">Tên: <?= $supplier->name ?> / ID : <?= $supplier->id?> </option>
+                                    <?php endforeach;?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Mã số thuế</label>
-                            <input class="form-control" name="tax_id" placeholder="Nhập mã số thuế" />
-                        </div>
-                        <div class="form-group">
-                            <label>Địa chỉ</label>
                             <input class="form-control" name="address" placeholder="Nhập địa chỉ" />
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input class="form-control" name="email" placeholder="Nhập email" />
-                        </div>
-                        <div class="form-group">
-                            <label>Số điện thoại</label>
-                            <input class="form-control" name="phone" placeholder="Nhập số điện thoại" />
                         </div>
                         <div class="form-group">
                             <label>Mô tả</label>
                             <textarea class="form-control" rows="3" name="comment"></textarea>
                         </div>
+                        <div class="foreground">
+                            <label>Sản phẩm đơn hàng: </label>
+                            <button id="themsp" class="btn btn-default">+</button>
+                            <button id="xoasp" class="btn btn-default">-</button>
+                        </div>
+                        <div><p></p></div>
                         <button type="submit" class="btn btn-default">Thêm</button>
                         <button type="reset" class="btn btn-default">Làm mới</button>
                     </form>
@@ -63,4 +61,7 @@
         <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
+    <script>
+
+    </script>
 @endsection
