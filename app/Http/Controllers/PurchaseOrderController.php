@@ -35,12 +35,13 @@ class PurchaseOrderController extends Controller
                 'tax' => 'required'
             ],
             [
-                'name.required' => 'Bạn chưa nhập mã số thuế'
+                'tax.required' => 'Bạn chưa nhập mã số thuế'
             ]);
         $purchaseorders = new Purchase_order();
         $purchaseorders->supplier_id = $request->supplier;
         $purchaseorders->tax = $request->tax;
         $purchaseorders->author = 1;
+        $purchaseorders->status="Mới tạo";
         $purchaseorders->comment = $request->comment_purchaseoders;
 
         $purchaseorders->save();
@@ -52,6 +53,7 @@ class PurchaseOrderController extends Controller
                 $purchaseorder_item->purchase_order_id = $id;
                 $purchaseorder_item->product_id = (int)$request->product_id[$i];
                 $purchaseorder_item->price = $request->price[$i];
+                $purchaseorder_item->status = "Mới tạo";
                 $purchaseorder_item->quantity = $request->quantity[$i];
                 $purchaseorder_item->comment = $request->comment[$i];
                 $purchaseorder_item->save();
