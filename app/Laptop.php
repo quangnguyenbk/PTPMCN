@@ -8,6 +8,7 @@ class Laptop extends Model
 {
     //
     protected $table='laptops';
+    public $fillable = ['status'];
 
     public function ram(){
     	return $this->hasMany("App\Ram", "ram","ram_id");

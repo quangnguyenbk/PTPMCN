@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['prefix'=>'shipper'], function(){
+    Route::get('list', 'ShipperController@getList');
+    Route::get('done/{id}', 'ShipperController@getDone');
+});
+
 Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'supplier'], function(){
 		Route::get('list', 'SupplierController@getList');
@@ -25,8 +30,20 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::post('update/{id}', 'SupplierController@postUpdate');
 
 		Route::get('delete/{id}', 'SupplierController@getDelete');
-		
+	
 	});
+
+    Route::group(['prefix'=>'laptop'], function(){
+        Route::get('list', 'LaptopController@getList');
+        Route::get('add', 'LaptopController@getAdd');
+        Route::get('update/{id}', 'LaptopController@getUpdate');
+        Route::get('delete/{id}','LaptopController@delete');
+        
+        Route::post('add','LaptopController@postAdd' );
+        Route::post('update/{id}','LaptopController@postUpdate' );
+        Route::get('change/{id}', 'LaptopController@getChange');
+    });
+
     Route::group(['prefix'=>'purchaseorders'], function(){
         Route::get('list','PurchaseOrderController@getList');
         Route::get('add', 'PurchaseOrderController@getAdd');
