@@ -15,12 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::group(['prefix'=>'shipper'], function(){
     Route::get('list', 'ShipperController@getList');
     Route::get('done/{id}', 'ShipperController@getDone');
 });
 
 Route::group(['prefix'=>'admin'], function(){
+
+Route::get('admin/login', 'UserController@getLoginAdmin');
+Route::post('admin/login', 'UserController@postLoginAdmin');
+
+Route::get('admin/logout', 'UserController@getLogout');
+Route::get('customer/main', function(){
+    return view('customer.main');
+});
+
+Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
 	Route::group(['prefix'=>'supplier'], function(){
 		Route::get('list', 'SupplierController@getList');
 		Route::get('add', 'SupplierController@getAdd');
