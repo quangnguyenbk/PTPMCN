@@ -32,10 +32,12 @@ class PurchaseOrderController extends Controller
 
         $this->validate($request,
             [
-                'tax' => 'required'
+                'tax' => 'required',
+                 'price.*' => 'required'
             ],
             [
-                'tax.required' => 'Bạn chưa nhập mã số thuế'
+                'tax.required' => 'Bạn chưa nhập mã số thuế',
+                'price.*.required' => 'Dm nhập giá ngay'
             ]);
         $purchaseorders = new Purchase_order();
         $purchaseorders->supplier_id = $request->supplier;
