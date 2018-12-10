@@ -36,7 +36,7 @@
                         <th>Ngày lập</th>
                         <th>Trạng thái</th>
                         <th>Ghi chú</th>
-                        <th>Sửa</th>
+                        <th>Xác nhận</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,7 +59,11 @@
                             <td>{{$item->create_date}}</td>
                             <td>{{$item->status}}</td>
                             <td>{{$item->comment}}</td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/pucharseoder/update">Sửa</a></td>
+                            <td class="center">
+                                <?php if($item->status != "Đã xác nhận") {?>
+                                <a class="btn btn-default" href="admin/purchaseorders/update/{{$item->id}}">Xác nhận</a>
+                                <?php } ?>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

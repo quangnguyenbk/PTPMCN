@@ -57,6 +57,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
         Route::get('list','PurchaseOrderController@getList');
         Route::get('add', 'PurchaseOrderController@getAdd');
         Route::post('edit/{id}', 'PurchaseOrderController@postUpdate');
+        Route::get('update/{id}', 'PurchaseOrderController@postEdit');
         Route::post('add','PurchaseOrderController@postAdd' );
     });
     Route::group(['prefix'=>'purchaseorderitem'], function(){
