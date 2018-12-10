@@ -58,7 +58,7 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Mã hóa đơn</th>
-                        <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
                         <th>Tiền</th>
                         <th>Ghi chú</th>
                         <th>Trạng thái</th>
@@ -73,7 +73,12 @@
                         <tr class="odd gradeX" align="center">
                             <td>{{$item->id}}</td>
                             <td>{{$item->purchase_order_id}}</td>
-                            <td>{{$item->product_id}}</td>
+                            <?php foreach ($laptops as $laptop) :
+                                if($laptop->id == $item->product_id){ ?>
+                                    <td>{{$laptop->laptop_name}}</td>
+                                <?php }
+
+                                endforeach;?>
                             <td>{{$item->price}}</td>
                             <td>{{$item->comment}}</td>
                             <td>{{$item->status}}</td>
