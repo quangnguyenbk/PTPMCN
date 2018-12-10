@@ -21,8 +21,6 @@ Route::group(['prefix'=>'shipper'], function(){
     Route::get('done/{id}', 'ShipperController@getDone');
 });
 
-Route::group(['prefix'=>'admin'], function(){
-
 Route::get('admin/login', 'UserController@getLoginAdmin');
 Route::post('admin/login', 'UserController@postLoginAdmin');
 
