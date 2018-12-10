@@ -79,7 +79,7 @@
                                 <?php }
 
                                 endforeach;?>
-                            <td>{{$item->price}}</td>
+                            <td>{{number_format($item->price)}} VNĐ</td>
                             <td>{{$item->comment}}</td>
                             <td>{{$item->status}}</td>
                             <td>{{$item->quantity}}</td>
