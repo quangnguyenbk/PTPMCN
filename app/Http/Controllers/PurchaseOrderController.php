@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Purchase_order;
 use App\Supplier;
+
 //use App\
 class PurchaseOrderController extends Controller
 {
@@ -17,7 +18,6 @@ class PurchaseOrderController extends Controller
             ->join('users', 'users.id', '=', 'purchase_orders.author')
             ->select('purchase_orders.*','suppliers.name','users.username')
             ->get();
-
         return view('admin.purchaseorders.list', ['listOrders' => $listOrders]);
     }
 
@@ -37,7 +37,7 @@ class PurchaseOrderController extends Controller
             ],
             [
                 'tax.required' => 'Bạn chưa nhập mã số thuế',
-                'price.*.required' => 'Dm nhập giá ngay'
+                'price.*.required' => 'Vui lòng nhập giá vào đầy đủ'
             ]);
         $purchaseorders = new Purchase_order();
         $purchaseorders->supplier_id = $request->supplier;
@@ -65,8 +65,23 @@ class PurchaseOrderController extends Controller
 
     }
 
-//    public function getUpdate(){
-//
-//    }
+    public function postUpdate(Request $request){
+        $this->validate($request,
+            [
+                'tax' => 'required',
+            ],
+            [
+                'tax.required' => 'Bạn chưa nhập mã số thuế',
+            ]);
+            $purchaseorders = Purchase_order::where('id', $request->id);
+            $purchaseorders->update([
+                'supplier_id' =>$request->supplier,
+                'tax' =>$request->tax,
+                'comment' =>$request->comment_purchaseoders
+            ]);
+
+            return redirect('admin/purchaseorderitem/detail/'.$request->id)->with('thongbao', 'Sửa thành công');
+
+    }
 
 }

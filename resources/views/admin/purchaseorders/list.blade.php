@@ -45,7 +45,16 @@
                             <td>{{$item->id}}</td>
                             <td><a href="admin/purchaseorderitem/detail/{{$item->id}}">{{$item->name}}</a></td>
                             <td>{{$item->username}}</td>
-                            <td>{{$item->total_money}}</td>
+                            <?php
+                                $items = DB::table('purchase_order_items')->select('price','quantity')->where('purchase_order_id', '=',$item->id)->get();
+                                $totalMoney= 0;
+                                if($items){
+                                    foreach ($items as $itemMoney){
+                                    $totalMoney = $totalMoney + (int)$itemMoney->price * (int)$itemMoney->quantity;
+                                    }
+                                }
+                            ?>
+                            <td>{{$totalMoney}}</td>
                             <td>{{$item->tax}}</td>
                             <td>{{$item->create_date}}</td>
                             <td>{{$item->status}}</td>

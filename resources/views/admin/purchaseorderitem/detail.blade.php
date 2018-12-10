@@ -18,6 +18,34 @@
                     {{session('thongbao')}}
                 </div>
             @endif
+                <h1 class="page-header">Thông tin đơn hàng
+                </h1>
+                <form action="admin/purchaseorders/edit/<?= $purchase_detail->id ?>" method="POST">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+                    <div class="form-group">
+                        <label>Tên nhà cung cấp</label>
+                        <select class="form-control" name="supplier">
+                            <?php foreach ($suppliers as $supplier):
+                            if($purchase_detail->supplier_id == $supplier->id){ ?>
+                            <option value="<?= $supplier->id ?>" selected ><?= $supplier->name ?> </option>
+
+                            <?php }
+                            else { ?>
+                            <option value="<?= $supplier->id ?>"  ><?= $supplier->name ?> </option>
+                            <?php }
+                            endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mã số thuế</label>
+                        <input class="form-control" name="tax" placeholder="Mã số thuế" value="<?= $purchase_detail->tax ?>"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả</label>
+                        <textarea class="form-control" rows="3" name="comment_purchaseoders" value="<?= $purchase_detail->comment ?>"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default">Sửa</button>
+                </form>
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Đơn hàng nhập
