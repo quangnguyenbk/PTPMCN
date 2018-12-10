@@ -54,7 +54,7 @@
                                     }
                                 }
                             ?>
-                            <td>{{$totalMoney}}</td>
+                            <td>{{number_format($totalMoney)}} VNĐ</td>
                             <td>{{$item->tax}}</td>
                             <td>{{$item->create_date}}</td>
                             <td>{{$item->status}}</td>
