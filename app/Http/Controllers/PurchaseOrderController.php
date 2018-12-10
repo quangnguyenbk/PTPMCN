@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Laptop;
 use App\Purchase_order_item;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Purchase_order;
@@ -42,7 +43,7 @@ class PurchaseOrderController extends Controller
         $purchaseorders = new Purchase_order();
         $purchaseorders->supplier_id = $request->supplier;
         $purchaseorders->tax = $request->tax;
-        $purchaseorders->author = 1;
+        $purchaseorders->author = Auth::id();
         $purchaseorders->status="Mới tạo";
         $purchaseorders->comment = $request->comment_purchaseoders;
 
