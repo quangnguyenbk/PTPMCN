@@ -15,7 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix'=>'admin'], function(){
+
+Route::group(['prefix'=>'shipper'], function(){
+    Route::get('list', 'ShipperController@getList');
+    Route::get('done/{id}', 'ShipperController@getDone');
+});
+
+Route::get('admin/login', 'UserController@getLoginAdmin');
+Route::post('admin/login', 'UserController@postLoginAdmin');
+
+Route::get('admin/logout', 'UserController@getLogout');
+Route::get('customer/main', function(){
+    return view('customer.main');
+});
+
+Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
 	Route::group(['prefix'=>'supplier'], function(){
 		Route::get('list', 'SupplierController@getList');
 		Route::get('add', 'SupplierController@getAdd');
@@ -25,8 +39,20 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::post('update/{id}', 'SupplierController@postUpdate');
 
 		Route::get('delete/{id}', 'SupplierController@getDelete');
-		
+	
 	});
+
+    Route::group(['prefix'=>'laptop'], function(){
+        Route::get('list', 'LaptopController@getList');
+        Route::get('add', 'LaptopController@getAdd');
+        Route::get('update/{id}', 'LaptopController@getUpdate');
+        Route::get('delete/{id}','LaptopController@delete');
+        
+        Route::post('add','LaptopController@postAdd' );
+        Route::post('update/{id}','LaptopController@postUpdate' );
+        Route::get('change/{id}', 'LaptopController@getChange');
+    });
+
     Route::group(['prefix'=>'purchaseorders'], function(){
         Route::get('list','PurchaseOrderController@getList');
         Route::get('add', 'PurchaseOrderController@getAdd');
@@ -40,10 +66,14 @@ Route::group(['prefix'=>'admin'], function(){
         Route::get('list', 'SalesOrderController@getList');
         Route::get('detail/{id}', 'SalesOrderController@getDetail');
         Route::get('add', 'SalesOrderController@getAdd');
+        Route::get('edit_order/{id}', 'SalesOrderController@getEditOrder');
         Route::get('edit_detail_order/{id}', 'SalesOrderController@getEditDetailOrder');
+        Route::get('add_detail_order/{id}', 'SalesOrderController@getAddDetailOrder');
 
         Route::post('add','SalesOrderController@postAdd' );
+        Route::post('edit_order/{id}', 'SalesOrderController@postEditOrder');
         Route::post('edit_detail_order/{id}', 'SalesOrderController@postEditDetailOrder');
+        Route::post('add_detail_order/{id}', 'SalesOrderController@postAddDetailOrder');
     });
 
 });

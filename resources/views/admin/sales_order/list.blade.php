@@ -31,6 +31,7 @@
                                 <th>Địa chỉ</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
+                                <th>Add Order Detail</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,6 +48,7 @@
                                 <td>{{$item->address}}</td>
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/sales_order/delete"> Delete</a></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/sales_order/edit_order/{{$item->id}}">Edit</a></td>
+                                <td class="center"><i class="fa fa-plus fa-fw"></i> <a href="admin/sales_order/add_detail_order/{{$item->id}}">Add Detail</a></td>
                             </tr>
                             @endforeach
                         </tbody>

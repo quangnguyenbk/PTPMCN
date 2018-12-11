@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Sales_order;
 use App\Sales_order_item;
+use App\User;
+use App\Laptop;
 use Illuminate\Support\Facades\DB;
 class SalesOrderController extends Controller
 {
@@ -25,7 +27,7 @@ class SalesOrderController extends Controller
             ->select('sales_order_items.*')
             ->where ('sales_orders.id',$salesOrderId)
             ->get();
-//        dd($sales_order_items);
+
         return view('admin.sales_order.detail', ['sales_order_items' => $sales_order_items] );
     }
 
@@ -34,23 +36,32 @@ class SalesOrderController extends Controller
         return view('admin.sales_order.edit_order_detail', ['sales_order_item'=>$sales_order_item]);
     }
 
-
+    public  function getEditOrder($id){
+        $customers= User::where('role', 1)->get();
+        $employees= User::where('role', 2)->get();
+        $sales_order = Sales_order::where('id', $id)->first();
+        return view('admin.sales_order.edit_order', ['sales_order'=>$sales_order,'customers'=>$customers, 'employees'=>$employees]);
+    }
 
     public function getAdd(){
-        return view('admin.sales_order.add');
+        $customers= User::where('role', 1)->get();
+        $employees= User::where('role', 2)->get();
+        return view('admin.sales_order.add',['customers'=>$customers, 'employees'=>$employees]);
+    }
+
+    public function getAddDetailOrder($id){
+        $sales_order = Sales_order::where('id', $id)->first();
+        $laptops = Laptop::all();
+        return view('admin.sales_order.add_order_detail', ['sales_order'=>$sales_order, 'laptops'=>$laptops]);
     }
 
     public function postAdd( Request $request){
         $this->validate($request,
             [
-                'customer_id' => 'required',
-                'staff_confirm' => 'required',
                 'total_money' => 'required',
                 'address' => 'required',
             ],
             [
-                'customer_id.required' => 'Bạn chưa nhập mã khách hàng',
-                'staff_confirm.required' => 'Bạn chưa nhập mã nhân viên ',
                 'total_money.required' => 'Bạn chưa nhập tổng số tiền',
                 'address.required' => 'Bạn chưa nhập địa chỉ',
 
@@ -68,6 +79,32 @@ class SalesOrderController extends Controller
 
         return redirect('admin/sales_order/add')->with('thongbao', 'Thêm thành công');
     }
+
+    public function postEditOrder( Request $request, $id){
+        $this->validate($request,
+            [
+                'total_money' => 'required',
+                'address' => 'required',
+            ],
+            [
+                'total_money.required' => 'Bạn chưa nhập tổng số tiền',
+                'address.required' => 'Bạn chưa nhập địa chỉ',
+
+            ]);
+        $salesOrder = Sales_order::find($id);;
+        $salesOrder->customer_id = $request->customer_id;
+        $salesOrder->staff_confirm = $request->staff_confirm;
+        $salesOrder->tax = $request->tax;
+        $salesOrder->total_money = $request->total_money;
+        $salesOrder->create_date = $request->create_date;
+        $salesOrder->comment = $request->comment;
+        $salesOrder->status = "mới tạo";
+        $salesOrder->address = $request->address;
+        $salesOrder->save();
+
+        return redirect('admin/sales_order/edit_order/'.$id)->with('thongbao', 'Lưu thành công');
+    }
+
 
     public function postEditDetailOrder(Request $request, $id){
         $this->validate($request,
@@ -94,6 +131,33 @@ class SalesOrderController extends Controller
         $sales_order_item->save();
 
         return redirect('admin/sales_order/edit_detail_order/'.$id)->with('thongbao', 'Sửa thành công');
+    }
+
+    public function postAddDetailOrder(Request $request, $id){
+        $this->validate($request,
+            [
+                'order_id' => 'required',
+                'laptop_id' => 'required',
+                'price' => 'required'
+            ],
+            [
+                'order_id.required' => 'Bạn chưa nhập mã đơn hàng',
+                'laptop_id.required' => 'Bạn chưa nhập mã sản phẩm',
+                'price.required' => 'Bạn chưa nhập giá ',
+            ]);
+        $sales_order_item = new Sales_order_item();
+        $sales_order_item->sales_order_id = $id;
+        $sales_order_item->product_id = $request->laptop_id;
+        $sales_order_item->price = $request->price;
+        $sales_order_item->discount = $request->promotion;
+        $sales_order_item->quantity = $request->quantity;
+        $sales_order_item->status = $request->status;
+        $sales_order_item->comment = $request->comment;
+        $sales_order_item->quantity_return = $request->return_number;
+        $sales_order_item->reason = $request->reason;
+        $sales_order_item->save();
+
+        return redirect('admin/sales_order/add_detail_order/'.$id)->with('thongbao', 'Thêm thành công');
     }
 
     public function getUpdate(){

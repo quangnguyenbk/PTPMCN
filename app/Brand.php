@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Vga extends Model
+class Brand extends Model
 {
     //
-    protected $table='vgas';
+    protected $table='brands';
 }

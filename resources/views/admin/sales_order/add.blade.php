@@ -31,11 +31,19 @@
                             <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                             <div class="form-group">
                                 <label>Mã khách hàng</label>
-                                <input class="form-control" name="customer_id" placeholder="Nhập mã khách hàng" />
+                                <select class="form-control" name="customer_id">
+                                    <?php foreach ($customers as $customer):?>
+                                    <option value="<?= $customer->id ?>">Tên: <?= $customer->username ?> </option>
+                                    <?php endforeach;?>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Mã nhân viên xác nhân</label>
-                                <input class="form-control" name="staff_confirm" placeholder="Nhập mã nhân viên xác nhận" />
+                                <select class="form-control" name="staff_confirm">
+                                    <?php foreach ($employees as $employee):?>
+                                    <option value="<?= $employee->id ?>">Tên: <?= $employee->username ?> </option>
+                                    <?php endforeach;?>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Số thuế</label>
