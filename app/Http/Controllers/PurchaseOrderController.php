@@ -59,6 +59,7 @@ class PurchaseOrderController extends Controller
                 $purchaseorder_item->price = $request->price[$i];
                 $purchaseorder_item->status = "Mới tạo";
                 $purchaseorder_item->quantity = $request->quantity[$i];
+                $purchaseorder_item->quantity_return = 0;
                 $purchaseorder_item->comment = $request->comment[$i];
                 $purchaseorder_item->save();
             }
@@ -92,6 +93,15 @@ class PurchaseOrderController extends Controller
             'status' => $status
         ]);
         return redirect('admin/purchaseorders/list')->with('thongbao', 'Xác nhận thành công đơn hàng mã '.$id);
+
+    }
+    public function cancelRequest($id){
+        $purchaseorders = Purchase_order::where('id', $id);
+        $status = "Đã hủy đơn hàng";
+        $purchaseorders->update([
+            'status' => $status
+        ]);
+        return redirect('admin/purchaseorders/list')->with('thongbao', 'Hủy thành công đơn hàng mã '.$id);
 
     }
 

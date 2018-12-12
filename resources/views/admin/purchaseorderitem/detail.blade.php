@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label>Mô tả</label>
-                        <textarea class="form-control" rows="3" name="comment_purchaseoders" value="<?= $purchase_detail->comment ?>"></textarea>
+                        <textarea class="form-control" rows="3" name="comment_purchaseoders"><?= $purchase_detail->comment ?></textarea>
                     </div>
                     <button type="submit" class="btn btn-default">Sửa</button>
                 </form>
@@ -56,16 +56,16 @@
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                     <tr align="center">
-                        <th>ID</th>
-                        <th>Mã hóa đơn</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Tiền</th>
-                        <th>Ghi chú</th>
-                        <th>Trạng thái</th>
-                        <th>Số lượng</th>
-                        <th>Số lượng trả lại</th>
-                        <th>Lí do</th>
-                        <th>Sửa</th>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Mã hóa đơn</th>
+                        <th class="text-center">Tên sản phẩm</th>
+                        <th class="text-center">Tiền</th>
+                        <th class="text-center">Ghi chú</th>
+                        <th class="text-center">Trạng thái</th>
+                        <th class="text-center">Số lượng</th>
+                        <th class="text-center">Số lượng trả lại</th>
+                        <th class="text-center">Lí do</th>
+                        <th class="text-center">Xác nhận/Sửa</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -77,7 +77,9 @@
                                 if($laptop->id == $item->product_id){ ?>
                                     <td>{{$laptop->laptop_name}}</td>
                                 <?php }
-
+                                else { ?>
+                                    <td></td>
+                                <?php }
                                 endforeach;?>
                             <td>{{number_format($item->price)}} VNĐ</td>
                             <td>{{$item->comment}}</td>
@@ -85,16 +87,115 @@
                             <td>{{$item->quantity}}</td>
                             <td>{{$item->quantity_return}}</td>
                             <td>{{$item->reason}}</td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/purchaseorderitem/update">Sửa</a></td>
+                            <td class="center">
+                                <?php if($item->status != "Đã xác nhận"){?>
+                                <a class="btn btn-success" href="admin/purchaseorderitem/change/{{$item->id}}">Xác nhận</a>
+                                    <?php } ?>
+                                <a class="btn btn-default" href="admin/purchaseorderitem/update/{{$item->id}}">Sửa đơn hàng</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
+                <div>
+                    <form action="admin/purchaseorderitem/add/<?= $purchase_detail->id ?>" method="POST">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+                        <label>Thêm chi tiết đơn hàng :</label>
+                        <div><p></p></div>
+                        <div class="foreground">
+                            <label>Sản phẩm đơn hàng: </label>
+                            <label id="themsp" class="btn btn-default">+</label>
+                            <label id="xoasp" class="btn btn-default">-</label>
+                        </div>
+                        <div><p></p></div>
+                        <div id="detailproduct">
+
+                        </div>
+                        <div><p></p></div>
+                        <div id="showbtn">
+
+                        </div>
+
+                    </form>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <?php $check = 0 ;
+                                    foreach($purchase_order_items as $item) :
+                                     if($item->status != "Đã xác nhận"){
+                                         $check = $check+1;
+                                     }
+                                     endforeach;
+                                if($check>0){?>
+                                    <label>Bạn còn <?= $check ?> sản phẩm chưa kiểm tra </label>
+                                <?php }
+                            if($purchase_detail->status != "Đã xác nhận" && $purchase_detail->status != "Đã hủy đơn hàng" && $check==0) {?>
+                            <label>Xác nhận/Hủy đơn hàng:</label>
+                            <a class="btn btn-success" href="admin/purchaseorders/update/{{$purchase_detail->id}}">Xác nhận</a>
+                            <a class="btn btn-danger" href="admin/purchaseorders/cancelrequest/{{$purchase_detail->id}}">Hủy đơn hàng</a>
+                            <?php } ?>
+                    </div>
+                </div>
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
+    <style>
 
+        .prod{
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-left: 5px;
+            margin-right: 10px;
+        }
+        .product_id{
+            height: 24px;
+        }
+        .margin {
+            margin: 2px;
+        }
+    </style>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+
+            $('#themsp').click(function () {
+                if($('#showbtn1').length){
+
+                }
+                else {
+                    $('#showbtn').append('<div id="showbtn1"><button type="submit" class="btn btn-default margin">Thêm</button>' +
+                        '<button type="reset" class="btn btn-default margin">Làm mới</button></div>');
+                }
+                $('#detailproduct').append('<div id="product" class="productdetail" name="productdetail"><input type="checkbox" name="record"><label>Sản phẩm: </label>' +
+                    '<select class="product_id prod" name="product_id[]">' +
+                    '<?php foreach ($products as $product) :?>'+
+                    '<option value="<?= $product->id ?>">Tên: <?= $product->laptop_name ?></option>'+
+                    '<?php endforeach;?>'+
+                    '</select>' +
+                    '<label > Số lượng</label><input class="prod" name="quantity[]" placeholder="Số lượng nhập" require>'+
+                    '<label > Đơn giá </label><input class="prod" name="price[]" placeholder="Đơn giá"><br>'+
+                    '<label>Mô tả:</label><textarea class="form-control" rows="3" name="comment[]"></textarea></label></div><p></p>');
+            });
+            $("#xoasp").click(function(){
+                $("#detailproduct").find('input[name="record"]').each(function(){
+                    if($(this).is(":checked")){
+                        $(this).parents("#product").remove();
+                    }
+                });
+                if($('#product').length){
+
+                }
+                else {
+                    $("#showbtn1").remove();
+                }
+            });
+        });
+    </script>
 @endsection

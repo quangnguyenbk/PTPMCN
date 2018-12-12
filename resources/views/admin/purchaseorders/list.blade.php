@@ -36,21 +36,20 @@
                         <th>Ngày lập</th>
                         <th>Trạng thái</th>
                         <th>Ghi chú</th>
-                        <th>Xác nhận</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($listOrders as $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$item->id}}</td>
-                            <td><a href="admin/purchaseorderitem/detail/{{$item->id}}">{{$item->name}}</a></td>
+                            <td><a href="admin/purchaseorderitem/detail/{{$item->id}}">{{$item->id}}</a></td>
+                            <td>{{$item->name}}</td>
                             <td>{{$item->username}}</td>
                             <?php
-                                $items = DB::table('purchase_order_items')->select('price','quantity')->where('purchase_order_id', '=',$item->id)->get();
+                                $items = DB::table('purchase_order_items')->select('price','quantity','quantity_return')->where('purchase_order_id', '=',$item->id)->get();
                                 $totalMoney= 0;
                                 if($items){
                                     foreach ($items as $itemMoney){
-                                    $totalMoney = $totalMoney + (int)$itemMoney->price * (int)$itemMoney->quantity;
+                                    $totalMoney = $totalMoney + (int)$itemMoney->price * ((int)$itemMoney->quantity - (int)$itemMoney->quantity_return);
                                     }
                                 }
                             ?>
@@ -59,11 +58,6 @@
                             <td>{{$item->create_date}}</td>
                             <td>{{$item->status}}</td>
                             <td>{{$item->comment}}</td>
-                            <td class="center">
-                                <?php if($item->status != "Đã xác nhận") {?>
-                                <a class="btn btn-default" href="admin/purchaseorders/update/{{$item->id}}">Xác nhận</a>
-                                <?php } ?>
-                            </td>
                         </tr>
                     @endforeach
                     </tbody>
