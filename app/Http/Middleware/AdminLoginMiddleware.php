@@ -18,7 +18,9 @@ class AdminLoginMiddleware
     {
         if (Auth::check()){
             $user = Auth::user();
-            if ($user->role == 2)
+            
+                
+            if ($user->hasAnyRole(['quanly','shipper', 'kho']))
                 return $next($request);
             else
                 return redirect('admin/login');

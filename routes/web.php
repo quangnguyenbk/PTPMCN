@@ -25,12 +25,18 @@ Route::get('admin/login', 'UserController@getLoginAdmin');
 Route::post('admin/login', 'UserController@postLoginAdmin');
 
 Route::get('admin/logout', 'UserController@getLogout');
-Route::get('customer/main', function(){
-    return view('customer.main');
+Route::group(['prefix'=>'customer'], function(){
+    Route::get('main', function(){
+        return view('customer.main');
+    });
+    Route::get('giohang', function(){
+        return view('customer.giohang');
+    });
+
+    Route::get('productDetail/{id}', 'LaptopController@getDetail');
+    
 });
-Route::get('customer/giohang', function(){
-    return view('customer.giohang');
-});
+
 
 Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
 	Route::group(['prefix'=>'supplier'], function(){
