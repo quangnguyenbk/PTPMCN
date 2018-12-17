@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Purchase_order;
 use App\Supplier;
+use App\User;
 
 //use App\
 class PurchaseOrderController extends Controller
@@ -17,7 +18,7 @@ class PurchaseOrderController extends Controller
         $listOrders = DB::table('purchase_orders')
             ->join('suppliers', 'suppliers.id', '=', 'purchase_orders.supplier_id')
             ->join('users', 'users.id', '=', 'purchase_orders.author')
-            ->select('purchase_orders.*','suppliers.name','users.username')
+            ->select('purchase_orders.*','suppliers.name','users.name')
             ->get();
         return view('admin.purchaseorders.list', ['listOrders' => $listOrders]);
     }
@@ -26,7 +27,11 @@ class PurchaseOrderController extends Controller
         $suppliers = Supplier::all();
         //$arthour =
         $products= Laptop::all();
-        return view('admin.purchaseorders.add',['suppliers'=>$suppliers,'products'=>$products]);
+        $user = Auth::user();
+        if( $user->hasRole('kho') ){
+            return view('admin.purchaseorders.add',['suppliers'=>$suppliers,'products'=>$products]);
+        }
+
     }
 
     public function postAdd( Request $request){
