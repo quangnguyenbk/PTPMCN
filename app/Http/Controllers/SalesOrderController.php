@@ -15,7 +15,7 @@ class SalesOrderController extends Controller
         $sales_orders = DB::table('sales_orders')
             ->join('users as u1', 'u1.id', '=', 'sales_orders.customer_id')
             ->join('users as u2', 'u2.id', '=', 'sales_orders.staff_confirm')
-            ->select('sales_orders.*', 'u1.username as customer_name', 'u2.username as user_name')
+            ->select('sales_orders.*', 'u1.name as customer_name', 'u2.name as user_name')
             ->get();
         return view('admin.sales_order.list', ['sales_orders' => $sales_orders] );
     }
@@ -37,15 +37,31 @@ class SalesOrderController extends Controller
     }
 
     public  function getEditOrder($id){
-        $customers= User::where('role', 1)->get();
-        $employees= User::where('role', 2)->get();
+        $customers = DB::table('users')
+            ->join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->where('role_user.role_id', 8)
+            ->select('users.*', 'role_user.role_id')
+            ->get();
+        $employees = DB::table('users')
+            ->join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->where('role_user.role_id', 5)
+            ->select('users.*', 'role_user.role_id')
+            ->get();
         $sales_order = Sales_order::where('id', $id)->first();
         return view('admin.sales_order.edit_order', ['sales_order'=>$sales_order,'customers'=>$customers, 'employees'=>$employees]);
     }
 
     public function getAdd(){
-        $customers= User::where('role', 1)->get();
-        $employees= User::where('role', 2)->get();
+        $customers = DB::table('users')
+            ->join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->where('role_user.role_id', 8)
+            ->select('users.*', 'role_user.role_id')
+            ->get();
+        $employees = DB::table('users')
+            ->join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->where('role_user.role_id', 5)
+            ->select('users.*', 'role_user.role_id')
+            ->get();
         return view('admin.sales_order.add',['customers'=>$customers, 'employees'=>$employees]);
     }
 
@@ -161,6 +177,46 @@ class SalesOrderController extends Controller
     }
 
     public function getUpdate(){
+
+    }
+
+    public function postUpdate(Request $request){
+        $this->validate($request,
+            [
+                'tax' => 'required',
+            ],
+            [
+                'tax.required' => 'Bạn chưa nhập số thuế',
+            ]);
+        $sales_orders = Sales_order::where('id', $request->id);
+        $sales_orders->update([
+            'customer_id' =>$request->customer_id,
+            'staff_confirm'=>$request->staff_confirm,
+            'address'=>$request->address,
+            'date_ship'=>$request->date_ship,
+            'tax' =>$request->tax,
+            'comment' =>$request->comment
+        ]);
+
+        return redirect('admin/sales_order_item/detail/'.$request->id)->with('thongbao', 'Sửa thành công');
+
+    }
+    public function postEdit($id){
+        $sales_orders = Sales_order::where('id', $id);
+        $status = "Đã xác nhận";
+        $sales_orders->update([
+            'status' => $status
+        ]);
+        return redirect('admin/sales_order/list')->with('thongbao', 'Xác nhận thành công đơn hàng mã '.$id);
+
+    }
+    public function cancelRequest($id){
+        $sales_orders = Sales_order::where('id', $id);
+        $status = "Đã hủy đơn hàng";
+        $sales_orders->update([
+            'status' => $status
+        ]);
+        return redirect('admin/sales_order/list')->with('thongbao', 'Hủy thành công đơn hàng mã '.$id);
 
     }
 

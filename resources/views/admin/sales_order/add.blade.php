@@ -33,7 +33,7 @@
                                 <label>Mã khách hàng</label>
                                 <select class="form-control" name="customer_id">
                                     <?php foreach ($customers as $customer):?>
-                                    <option value="<?= $customer->id ?>">Tên: <?= $customer->username ?> </option>
+                                    <option value="<?= $customer->id ?>">Tên: <?= $customer->name ?> </option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -41,7 +41,7 @@
                                 <label>Mã nhân viên xác nhân</label>
                                 <select class="form-control" name="staff_confirm">
                                     <?php foreach ($employees as $employee):?>
-                                    <option value="<?= $employee->id ?>">Tên: <?= $employee->username ?> </option>
+                                    <option value="<?= $employee->id ?>">Tên: <?= $employee->name ?> </option>
                                     <?php endforeach;?>
                                 </select>
                             </div>

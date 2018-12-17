@@ -29,15 +29,16 @@
                                 <th>Comment</th>
                                 <th>Trạng thái</th>
                                 <th>Địa chỉ</th>
-                                <th>Delete</th>
-                                <th>Edit</th>
-                                <th>Add Order Detail</th>
+                                <th>Ngày ship</th>
+                                {{--<th>Hủy</th>--}}
+                                {{--<th>Edit</th>--}}
+                                {{--<th>Add Order Detail</th>--}}
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($sales_orders as $item)
                             <tr class="odd gradeX" align="center">
-                                <td><a href="admin/sales_order/detail/{{$item->id}}}">{{$item->id}}</a></td>
+                                <td><a href="admin/sales_order_item/detail/{{$item->id}}}">{{$item->id}}</a></td>
                                 <td>{{$item->customer_name}}</td>
                                 <td>{{$item->user_name}}</td>
                                 <td>{{$item->tax}}</td>
@@ -46,9 +47,10 @@
                                 <td>{{$item->comment}}</td>
                                 <td>{{$item->status}}</td>
                                 <td>{{$item->address}}</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/sales_order/delete"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/sales_order/edit_order/{{$item->id}}">Edit</a></td>
-                                <td class="center"><i class="fa fa-plus fa-fw"></i> <a href="admin/sales_order/add_detail_order/{{$item->id}}">Add Detail</a></td>
+                                <td>{{$item->date_ship}}</td>
+                                {{--<td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/sales_order/delete"> Hủy</a></td>--}}
+                                {{--<td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/sales_order/edit_order/{{$item->id}}">Edit</a></td>--}}
+                                {{--<td class="center"><i class="fa fa-plus fa-fw"></i> <a href="admin/sales_order/add_detail_order/{{$item->id}}">Add Detail</a></td>--}}
                             </tr>
                             @endforeach
                         </tbody>

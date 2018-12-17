@@ -85,11 +85,22 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
         Route::get('edit_order/{id}', 'SalesOrderController@getEditOrder');
         Route::get('edit_detail_order/{id}', 'SalesOrderController@getEditDetailOrder');
         Route::get('add_detail_order/{id}', 'SalesOrderController@getAddDetailOrder');
+        Route::get('update/{id}', 'SalesOrderController@postEdit');
+        Route::get('cancelrequest/{id}', 'SalesOrderController@cancelRequest');
 
         Route::post('add','SalesOrderController@postAdd' );
         Route::post('edit_order/{id}', 'SalesOrderController@postEditOrder');
         Route::post('edit_detail_order/{id}', 'SalesOrderController@postEditDetailOrder');
         Route::post('add_detail_order/{id}', 'SalesOrderController@postAddDetailOrder');
+        Route::post('edit/{id}', 'SalesOrderController@postUpdate');
+    });
+    Route::group(['prefix'=>'sales_order_item'], function(){
+        Route::get('detail/{id}','SalesOrderItemController@getItems');
+        Route::get('update/{id}','SalesOrderItemController@getUpdate');
+        Route::post('update/{id}','SalesOrderItemController@postUpdate');
+        Route::post('add/{id}','SalesOrderItemController@postAdd' );
+        Route::get('change/{id}', 'SalesOrderItemController@change');
+
     });
 
 });
