@@ -84,11 +84,16 @@
                             <td>{{$item->comment}}</td>
                             <td>{{$item->status}}</td>
                             <td>{{$item->quantity}}</td>
-                            <?php if($purchase_detail->status != "Đã duyệt" && $purchase_detail->status != "Đã hủy đơn hàng") {?>
+                            <?php if($purchase_detail->status != "Đã duyệt" && $purchase_detail->status != "Đã hủy đơn hàng" && $item->status != "Đã hủy") {?>
                             <td class="center">
                                 <a class="btn btn-default" href="admin/purchaseorderitem/update/{{$item->id}}">Sửa đơn hàng</a>
                             </td>
-                            <?php } ?>
+                            <?php
+                            }
+                            if($item->status == "Đã hủy"){ ?>
+                                <td>
+                                </td>
+                            <?php }?>
                         </tr>
                     @endforeach
                     </tbody>
