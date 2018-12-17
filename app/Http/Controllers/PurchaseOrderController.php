@@ -93,11 +93,20 @@ class PurchaseOrderController extends Controller
     }
     public function postEdit($id){
         $purchaseorders = Purchase_order::where('id', $id);
-        $status = "Đã xác nhận";
+        $status = "Đã đề xuất";
         $purchaseorders->update([
             'status' => $status
         ]);
-        return redirect('admin/purchaseorders/list')->with('thongbao', 'Xác nhận thành công đơn hàng mã '.$id);
+        return redirect('admin/purchaseorders/list')->with('thongbao', 'Gửi đề xuất thành công đơn hàng mã '.$id);
+
+    }
+    public function postApprove($id){
+        $purchaseorders = Purchase_order::where('id', $id);
+        $status = "Đã duyệt";
+        $purchaseorders->update([
+            'status' => $status
+        ]);
+        return redirect('admin/purchaseorders/list')->with('thongbao', 'Duyệt thành công đơn hàng mã '.$id);
 
     }
     public function cancelRequest($id){

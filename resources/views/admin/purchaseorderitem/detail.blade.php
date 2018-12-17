@@ -63,7 +63,9 @@
                         <th class="text-center">Ghi chú</th>
                         <th class="text-center">Trạng thái</th>
                         <th class="text-center">Số lượng</th>
+                        <?php if($purchase_detail->status != "Đã duyệt") {?>
                         <th class="text-center">Sửa</th>
+                        <?php } ?>
                     </tr>
                     </thead>
                     <tbody>
@@ -75,23 +77,24 @@
                                 if($laptop->id == $item->product_id){ ?>
                                     <td>{{$laptop->laptop_name}}</td>
                                 <?php }
-                                else { ?>
-                                    <td></td>
-                                <?php }
                                 endforeach;?>
                             <td>{{number_format($item->price)}} VNĐ</td>
                             <td>{{$item->comment}}</td>
                             <td>{{$item->status}}</td>
                             <td>{{$item->quantity}}</td>
+                            <?php if($purchase_detail->status != "Đã duyệt") {?>
                             <td class="center">
                                 <a class="btn btn-default" href="admin/purchaseorderitem/update/{{$item->id}}">Sửa đơn hàng</a>
                             </td>
+                            <?php } ?>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
                 <div>
+                    <?php $user = Auth::user();
+                    if( $user->hasRole('kho') ){ ?>
                     <form action="admin/purchaseorderitem/add/<?= $purchase_detail->id ?>" method="POST">
                         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                         <label>Thêm chi tiết đơn hàng :</label>
@@ -111,6 +114,7 @@
                         </div>
 
                     </form>
+                        <?php } ?>
                 </div>
                 <div>
                     <br>
@@ -125,7 +129,7 @@
                                 <?php } ?>
                                 <?php $user = Auth::user();
                                 if( $user->hasRole('quanly') ){ ?>
-                                <a class="btn btn-success" href="admin/purchaseorders/update/{{$purchase_detail->id}}">Duyệt đơn hàng</a>
+                                <a class="btn btn-success" href="admin/purchaseorders/approve/{{$purchase_detail->id}}">Duyệt đơn hàng</a>
                                 <?php } ?>
                             <a class="btn btn-danger" href="admin/purchaseorders/cancelrequest/{{$purchase_detail->id}}">Hủy đơn hàng</a>
                             <?php } ?>

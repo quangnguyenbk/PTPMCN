@@ -7,6 +7,8 @@ use App\Supplier;
 use Illuminate\Http\Request;
 use App\Purchase_order_item;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 class PurchaseOrderItemController extends Controller
 {
      public function getItems($id){
@@ -16,6 +18,11 @@ class PurchaseOrderItemController extends Controller
          $suppliers = Supplier::all();
          $laptops = Laptop::all();
          $products= Laptop::all();
+         $user = Auth::user();
+         if( $user->hasRole('kho') && $purchase_detail->status == "Đã đề xuất" ){
+             return view('admin.purchaseorderitem.detailkho', ['purchase_order_items'=>$purchase_order_items,'purchase_detail'=>$purchase_detail,'suppliers'=>$suppliers
+                 ,'laptops'=>$laptops,'products'=>$products]);
+         }
          return view('admin.purchaseorderitem.detail', ['purchase_order_items'=>$purchase_order_items,'purchase_detail'=>$purchase_detail,'suppliers'=>$suppliers
          ,'laptops'=>$laptops,'products'=>$products]);
      }
