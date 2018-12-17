@@ -45,11 +45,13 @@
                             <td>{{$item->sup}}</td>
                             <td>{{$item->auth}}</td>
                             <?php
-                                $items = DB::table('purchase_order_items')->select('price','quantity','quantity_return')->where('purchase_order_id', '=',$item->id)->get();
+                                $items = DB::table('purchase_order_items')->select('price','quantity','quantity_return','status')->where('purchase_order_id', '=',$item->id)->get();
                                 $totalMoney= 0;
                                 if($items){
                                     foreach ($items as $itemMoney){
-                                    $totalMoney = $totalMoney + (int)$itemMoney->price * ((int)$itemMoney->quantity - (int)$itemMoney->quantity_return);
+                                        if($itemMoney->status != "Đã hủy"){
+                                            $totalMoney = $totalMoney + (int)$itemMoney->price * (int)$itemMoney->quantity;
+                                        }
                                     }
                                 }
                             ?>

@@ -45,9 +45,7 @@ class PurchaseOrderItemController extends Controller
             'product_id' =>$request->product,
             'comment' =>$request->comment,
             'price' =>$request->price,
-            'quantity' =>$request->quantity,
-            'quantity_return' =>$request->quantity_return,
-            'reason' =>$request->reason
+            'quantity' =>$request->quantity
         ]);
         $purchaseorder = Purchase_order_item::where('id', $request->id)->first();
         return redirect('admin/purchaseorderitem/detail/'.$purchaseorder->purchase_order_id)->with('thongbao', 'Sửa thành công');
@@ -84,6 +82,16 @@ class PurchaseOrderItemController extends Controller
         ]);
         $purchaseorder = Purchase_order_item::where('id', $id)->first();
         return redirect('admin/purchaseorderitem/detail/'.$purchaseorder->purchase_order_id)->with('thongbao', 'Xác nhận thành công');
+
+    }
+    public function cancelrequest($id){
+        $purchaseorders = Purchase_order_item::where('id', $id);
+        $status = "Đã hủy";
+        $purchaseorders->update([
+            'status' => $status
+        ]);
+        $purchaseorder = Purchase_order_item::where('id', $id)->first();
+        return redirect('admin/purchaseorderitem/detail/'.$purchaseorder->purchase_order_id)->with('thongbao', 'Hủy thành công');
 
     }
 }

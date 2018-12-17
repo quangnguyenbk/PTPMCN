@@ -77,6 +77,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
         Route::post('update/{id}','PurchaseOrderItemController@postUpdate');
         Route::post('add/{id}','PurchaseOrderItemController@postAdd' );
         Route::get('change/{id}', 'PurchaseOrderItemController@change');
+        Route::get('cancelrequest/{id}', 'PurchaseOrderItemController@cancelrequest');
 
     });
     Route::group(['prefix'=>'sales_order'], function(){

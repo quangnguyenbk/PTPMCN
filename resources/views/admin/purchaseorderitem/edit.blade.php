@@ -66,15 +66,8 @@
                                 <label>Số lượng nhập</label>
                                 <input class="form-control" name="quantity" placeholder="Số lượng nhập" value="<?= $purchaseorderitem->quantity ?>"/>
                             </div>
-                            <div class="form-group">
-                                <label>Số lượng trả lại</label>
-                                <input class="form-control" name="quantity_return" placeholder="Số lượng trả lại" value="<?= $purchaseorderitem->quantity_return ?>"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Lí do trả lại</label>
-                                <textarea class="form-control" rows="3" name="reason"><?= $purchaseorderitem->reason ?></textarea>
-                            </div>
                             <button type="submit" class="btn btn-default">Sửa</button>
+                            <a class="btn btn-danger" href="admin/purchaseorderitem/cancelrequest/{{$purchaseorderitem->id}}">Hủy mua sản phẩm</a>
                         </form>
                 </div>
             </div>

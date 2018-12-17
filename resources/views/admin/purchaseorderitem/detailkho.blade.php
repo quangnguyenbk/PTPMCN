@@ -51,7 +51,7 @@
                     <thead>
                     <tr align="center">
                         <th class="text-center">ID</th>
-                        <th class="text-center">Mã hóa đơn</th>
+                        <th class="text-center">Mã đơn hàng</th>
                         <th class="text-center">Tên sản phẩm</th>
                         <th class="text-center">Tiền</th>
                         <th class="text-center">Ghi chú</th>

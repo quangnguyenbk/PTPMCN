@@ -44,7 +44,9 @@
                         <label>Mô tả</label>
                         <textarea class="form-control" rows="3" name="comment_purchaseoders"><?= $purchase_detail->comment ?></textarea>
                     </div>
+                    <?php if($purchase_detail->status != "Đã duyệt" && $purchase_detail->status != "Đã hủy đơn hàng") {?>
                     <button type="submit" class="btn btn-default">Sửa</button>
+                    <?php } ?>
                 </form>
             <div class="row">
                 <div class="col-lg-12">
@@ -57,13 +59,13 @@
                     <thead>
                     <tr align="center">
                         <th class="text-center">ID</th>
-                        <th class="text-center">Mã hóa đơn</th>
+                        <th class="text-center">Mã đơn hàng</th>
                         <th class="text-center">Tên sản phẩm</th>
                         <th class="text-center">Tiền</th>
                         <th class="text-center">Ghi chú</th>
                         <th class="text-center">Trạng thái</th>
                         <th class="text-center">Số lượng</th>
-                        <?php if($purchase_detail->status != "Đã duyệt") {?>
+                        <?php if($purchase_detail->status != "Đã duyệt" && $purchase_detail->status != "Đã hủy đơn hàng") {?>
                         <th class="text-center">Sửa</th>
                         <?php } ?>
                     </tr>
@@ -82,7 +84,7 @@
                             <td>{{$item->comment}}</td>
                             <td>{{$item->status}}</td>
                             <td>{{$item->quantity}}</td>
-                            <?php if($purchase_detail->status != "Đã duyệt") {?>
+                            <?php if($purchase_detail->status != "Đã duyệt" && $purchase_detail->status != "Đã hủy đơn hàng") {?>
                             <td class="center">
                                 <a class="btn btn-default" href="admin/purchaseorderitem/update/{{$item->id}}">Sửa đơn hàng</a>
                             </td>
@@ -121,7 +123,7 @@
                 </div>
                 <div>
                     <div class="form-group">
-                            <?php if($purchase_detail->status != "Đã duyệt") {?>
+                            <?php if($purchase_detail->status != "Đã duyệt" && $purchase_detail->status != "Đã hủy đơn hàng") {?>
                             <label>Xác nhận/Hủy đơn hàng:</label>
                                 <?php $user = Auth::user();
                                 if( $user->hasRole('kho') ){ ?>
