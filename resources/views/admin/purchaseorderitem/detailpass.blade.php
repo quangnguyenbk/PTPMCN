@@ -117,16 +117,18 @@
                 </div>
                 <div>
                     <div class="form-group">
-                            <?php if($purchase_detail->status != "Đã duyệt") {?>
+                        <?php $check = 0 ;
+                                    foreach($purchase_order_items as $item) :
+                                     if($item->status != "Đã xác nhận"){
+                                         $check = $check+1;
+                                     }
+                                     endforeach;
+                                if($check>0){?>
+                                    <label>Bạn còn <?= $check ?> sản phẩm chưa kiểm tra </label>
+                                <?php }
+                            if($purchase_detail->status != "Đã xác nhận" && $purchase_detail->status != "Đã hủy đơn hàng" && $check==0) {?>
                             <label>Xác nhận/Hủy đơn hàng:</label>
-                                <?php $user = Auth::user();
-                                if( $user->hasRole('kho') ){ ?>
-                            <a class="btn btn-primary" href="admin/purchaseorders/update/{{$purchase_detail->id}}">Gửi đề xuất</a>
-                                <?php } ?>
-                                <?php $user = Auth::user();
-                                if( $user->hasRole('quanly') ){ ?>
-                                <a class="btn btn-success" href="admin/purchaseorders/update/{{$purchase_detail->id}}">Duyệt đơn hàng</a>
-                                <?php } ?>
+                            <a class="btn btn-success" href="admin/purchaseorders/update/{{$purchase_detail->id}}">Xác nhận</a>
                             <a class="btn btn-danger" href="admin/purchaseorders/cancelrequest/{{$purchase_detail->id}}">Hủy đơn hàng</a>
                             <?php } ?>
                     </div>
