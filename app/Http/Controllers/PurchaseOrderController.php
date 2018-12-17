@@ -18,8 +18,8 @@ class PurchaseOrderController extends Controller
         $listOrders = DB::table('purchase_orders')
             ->join('suppliers', 'suppliers.id', '=', 'purchase_orders.supplier_id')
             ->join('users', 'users.id', '=', 'purchase_orders.author')
-            ->select('purchase_orders.*','suppliers.name','users.name')
-            ->get();
+            ->select('purchase_orders.*','suppliers.name as sup','users.name as  auth')
+            ->get('purchase_orders');
         return view('admin.purchaseorders.list', ['listOrders' => $listOrders]);
     }
 
@@ -29,7 +29,7 @@ class PurchaseOrderController extends Controller
         $products= Laptop::all();
         $user = Auth::user();
         if( $user->hasRole('kho') ){
-            return view('admin.purchaseorders.add',['suppliers'=>$suppliers,'products'=>$products]);
+            return view('admin.purchaseorders.add',['suppliers'=>$suppliers,'products'=>$products,'user'=>$user]);
         }
 
     }
@@ -79,7 +79,7 @@ class PurchaseOrderController extends Controller
                 'tax' => 'required',
             ],
             [
-                'tax.required' => 'Bạn chưa nhập mã số thuế',
+                'tax.required' => 'Bạn chưa nhập số thuế',
             ]);
             $purchaseorders = Purchase_order::where('id', $request->id);
             $purchaseorders->update([

@@ -25,7 +25,6 @@
                         <li class="divider"></li>
                         <li><a href="admin/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
-                        
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>

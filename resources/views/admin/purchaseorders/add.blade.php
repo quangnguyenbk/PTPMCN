@@ -39,7 +39,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Mã số thuế</label>
+                            <label>Số thuế</label>
                             <input class="form-control" name="tax" placeholder="Mã số thuế" />
                         </div>
                         <div class="form-group">
@@ -72,7 +72,7 @@
     <!-- /#page-wrapper -->
 <style>
     body{
-        width: 120%;
+        width: 100%;
     }
     .prod{
         border: 1px solid #ccc;

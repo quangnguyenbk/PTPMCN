@@ -42,8 +42,8 @@
                     @foreach($listOrders as $item)
                         <tr class="odd gradeX" align="center">
                             <td><a href="admin/purchaseorderitem/detail/{{$item->id}}">{{$item->id}}</a></td>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->username}}</td>
+                            <td>{{$item->sup}}</td>
+                            <td>{{$item->auth}}</td>
                             <?php
                                 $items = DB::table('purchase_order_items')->select('price','quantity','quantity_return')->where('purchase_order_id', '=',$item->id)->get();
                                 $totalMoney= 0;

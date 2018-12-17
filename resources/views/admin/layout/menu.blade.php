@@ -1,3 +1,6 @@
+<?php
+use App\User;
+?>
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -28,13 +31,19 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-cube fa-fw"></i>Hóa đơn nhập<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-cube fa-fw"></i>Nhập hàng<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin/purchaseorders/list">Danh sách</a>
+                                    <a href="admin/purchaseorders/list">Danh sách đơn hàng</a>
                                 </li>
+                                <?php $user = Auth::user();
+                                if( $user->hasRole('kho') ){ ?>
                                 <li>
-                                    <a href="admin/purchaseorders/add">Thêm</a>
+                                    <a href="admin/purchaseorders/add">Thêm đơn hàng</a>
+                                </li>
+                                <?php } ?>
+                                <li>
+                                    <a href="admin/purchaseorders/add">Đơn hàng đã nhận</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
