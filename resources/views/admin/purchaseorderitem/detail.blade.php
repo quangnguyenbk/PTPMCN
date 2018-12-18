@@ -86,11 +86,11 @@
                             <td>{{$item->quantity}}</td>
                             <?php if($purchase_detail->status != "Đã duyệt" && $purchase_detail->status != "Đã hủy đơn hàng" && $item->status != "Đã hủy") {?>
                             <td class="center">
-                                <a class="btn btn-default" href="admin/purchaseorderitem/update/{{$item->id}}">Sửa đơn hàng</a>
+                                <a class="btn btn-default" href="admin/purchaseorderitem/update/{{$item->id}}">Sửa sản phẩm</a>
                             </td>
                             <?php
                             }
-                            if($item->status == "Đã hủy"){ ?>
+                            if($item->status == "Đã hủy" && $purchase_detail->status != "Đã hủy đơn hàng"){ ?>
                                 <td>
                                 </td>
                             <?php }?>
@@ -101,7 +101,7 @@
             </div>
                 <div>
                     <?php $user = Auth::user();
-                    if( $user->hasRole('kho') ){ ?>
+                    if( $purchase_detail->status != "Đã duyệt" && $purchase_detail->status != "Đã hủy đơn hàng" ){ ?>
                     <form action="admin/purchaseorderitem/add/<?= $purchase_detail->id ?>" method="POST">
                         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                         <label>Thêm chi tiết đơn hàng :</label>

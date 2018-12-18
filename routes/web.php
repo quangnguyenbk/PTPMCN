@@ -64,17 +64,23 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
 
     Route::group(['prefix'=>'purchaseorders'], function(){
         Route::get('list','PurchaseOrderController@getList');
+        Route::get('listpass','PurchaseOrderController@getListPass');
         Route::get('add', 'PurchaseOrderController@getAdd');
         Route::post('edit/{id}', 'PurchaseOrderController@postUpdate');
         Route::get('update/{id}', 'PurchaseOrderController@postEdit');
+        Route::get('updatefinish/{id}', 'PurchaseOrderController@postEditFinish');
         Route::get('cancelrequest/{id}', 'PurchaseOrderController@cancelRequest');
         Route::post('add','PurchaseOrderController@postAdd' );
         Route::get('approve/{id}', 'PurchaseOrderController@postApprove');
+        Route::get('updatepass/{id}', 'PurchaseOrderController@postEditPass');
     });
     Route::group(['prefix'=>'purchaseorderitem'], function(){
         Route::get('detail/{id}','PurchaseOrderItemController@getItems');
-        Route::get('update/{id}','PurchaseOrderItemController@getUpdate');
+        Route::get('detailpass/{id}','PurchaseOrderItemController@getItemsPass');
+        Route::get('update/{id}','PurchaseOrderItemController@getUpdatePass');
+        Route::get('editpass/{id}','PurchaseOrderItemController@getUpdatePass');
         Route::post('update/{id}','PurchaseOrderItemController@postUpdate');
+        Route::post('editpass/{id}','PurchaseOrderItemController@postUpdatePass');
         Route::post('add/{id}','PurchaseOrderItemController@postAdd' );
         Route::get('change/{id}', 'PurchaseOrderItemController@change');
         Route::get('cancelrequest/{id}', 'PurchaseOrderItemController@cancelrequest');

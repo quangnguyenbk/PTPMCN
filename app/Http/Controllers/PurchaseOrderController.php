@@ -22,6 +22,15 @@ class PurchaseOrderController extends Controller
             ->get('purchase_orders');
         return view('admin.purchaseorders.list', ['listOrders' => $listOrders]);
     }
+    public function getListPass(){
+//        $listPuchaseOrder = Purchase_order::all();
+        $listOrders = DB::table('purchase_orders')
+            ->join('suppliers', 'suppliers.id', '=', 'purchase_orders.supplier_id')
+            ->join('users', 'users.id', '=', 'purchase_orders.author')
+            ->select('purchase_orders.*','suppliers.name as sup','users.name as  auth')
+            ->get('purchase_orders');
+        return view('admin.purchaseorders.listpass', ['listOrders' => $listOrders]);
+    }
 
     public function getAdd(){
         $suppliers = Supplier::all();
@@ -116,6 +125,40 @@ class PurchaseOrderController extends Controller
             'status' => $status
         ]);
         return redirect('admin/purchaseorders/list')->with('thongbao', 'Hủy thành công đơn hàng mã '.$id);
+
+    }
+    public function postEditPass($id){
+        $purchaseorders = Purchase_order::where('id', $id);
+        $status = "Đã nhận hàng";
+        $purchaseorders->update([
+            'status' => $status
+        ]);
+        $purchase_order_items = DB::table('purchase_order_items')->where('purchase_order_id', '=',$id)->get();
+        foreach ($purchase_order_items as $item){
+            $purchase_order_items = Purchase_order_item::where('id', $item->id);
+            $purchase_order_items->update([
+                'status' => $status
+            ]);
+        }
+        return redirect('admin/purchaseorderitem/detailpass/'.$id)->with('thongbao', 'Xác nhận nhận thành công đơn hàng mã '.$id);
+
+    }
+    public function postEditFinish($id){
+        $purchaseorders = Purchase_order::where('id', $id);
+        $status = "Hoàn thành";
+        $purchaseorders->update([
+            'status' => $status
+        ]);
+        $purchase_order_items = DB::table('purchase_order_items')->where('purchase_order_id', '=',$id)->get();
+        foreach ($purchase_order_items as $item){
+            $laptopitem = Laptop::where('id', $item->product_id)->first();
+            $addproduct = $laptopitem->quantity + $item->quantity - $item->quantity_return;
+            $laptop = Laptop::where('id', $item->product_id);
+            $laptop->update([
+                'quantity' => $addproduct
+            ]);
+        }
+        return redirect('admin/purchaseorderitem/detailpass/'.$id)->with('thongbao', 'Xác nhận hoành thành thành công đơn hàng mã '.$id);
 
     }
 

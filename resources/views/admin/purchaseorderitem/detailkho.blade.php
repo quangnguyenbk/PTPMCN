@@ -20,7 +20,6 @@
             @endif
                 <h1 class="page-header">Thông tin đơn hàng đã gửi đề xuất
                 </h1>
-                <form action="admin/purchaseorders/edit/<?= $purchase_detail->id ?>" method="POST">
                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                     <div class="form-group">
                         <label>Tên nhà cung cấp:</label>
@@ -39,7 +38,6 @@
                         <label>Mô tả:</label>
                         <?= $purchase_detail->comment ?>
                     </div>
-                </form>
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Đơn hàng nhập

@@ -34,16 +34,16 @@ use App\User;
                             <a href="#"><i class="fa fa-cube fa-fw"></i>Nhập hàng<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin/purchaseorders/list">Danh sách đơn hàng</a>
+                                    <a href="admin/purchaseorders/list">Danh sách yêu cầu nhập hàng</a>
                                 </li>
                                 <?php $user = Auth::user();
                                 if( $user->hasRole('kho') ){ ?>
                                 <li>
-                                    <a href="admin/purchaseorders/add">Thêm đơn hàng</a>
+                                    <a href="admin/purchaseorders/add">Thêm yêu cầu đơn hàng mới</a>
                                 </li>
                                 <?php } ?>
                                 <li>
-                                    <a href="admin/purchaseorders/add">Đơn hàng đã nhận</a>
+                                    <a href="admin/purchaseorders/listpass">Đơn hàng nhận</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

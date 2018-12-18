@@ -20,7 +20,7 @@
             @endif
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Danh sách yêu cầu nhập hàng</a>
+                    <h1 class="page-header">Danh sách nhận hàng</a>
                         </li>
                         <small>Danh sách</small>
                     </h1>
@@ -37,13 +37,14 @@
                         <th>Ngày lập</th>
                         <th>Trạng thái</th>
                         <th>Ghi chú</th>
+                        <th>Xác nhận nhận hàng</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($listOrders as $item)
-                        <?php if($item->status != "Đã nhận hàng" && $item->status != "Hoàn thành") {?>
+                        <?php if($item->status == "Đã nhận hàng" || $item->status == "Hoàn thành" || $item->status == "Đã duyệt") { ?>
                         <tr class="odd gradeX" align="center">
-                            <td><a href="admin/purchaseorderitem/detail/{{$item->id}}">{{$item->id}}</a></td>
+                            <td><a href="admin/purchaseorderitem/detailpass/{{$item->id}}">{{$item->id}}</a></td>
                             <td>{{$item->sup}}</td>
                             <td>{{$item->auth}}</td>
                             <?php
@@ -52,7 +53,7 @@
                                 if($items){
                                     foreach ($items as $itemMoney){
                                         if($itemMoney->status != "Đã hủy"){
-                                            $totalMoney = $totalMoney + (int)$itemMoney->price * (int)$itemMoney->quantity;
+                                            $totalMoney = $totalMoney + (int)$itemMoney->price * ((int)$itemMoney->quantity - (int)$itemMoney->quantity_return);
                                         }
                                     }
                                 }
@@ -62,6 +63,13 @@
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->status}}</td>
                             <td>{{$item->comment}}</td>
+                            <?php if($item->status == "Đã duyệt"){ ?>
+                                <td><a class="btn btn-success" href="admin/purchaseorders/updatepass/{{$item->id}}">Xác nhận đã nhận hàng</a></td>
+                            <?php }
+                            else { ?>
+                                <td></td>
+                            <?php } ?>
+
                         </tr>
                         <?php } ?>
                     @endforeach
