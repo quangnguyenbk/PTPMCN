@@ -89,6 +89,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
     Route::group(['prefix'=>'sales_order'], function(){
         Route::get('list', 'SalesOrderController@getList');
         Route::get('shiper', 'SalesOrderController@getShiper');
+        Route::get('sale', 'SalesOrderController@getSalesOrder');
         Route::get('detail/{id}', 'SalesOrderController@getDetail');
         Route::get('add', 'SalesOrderController@getAdd');
         Route::get('edit_order/{id}', 'SalesOrderController@getEditOrder');
@@ -96,6 +97,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
         Route::get('add_detail_order/{id}', 'SalesOrderController@getAddDetailOrder');
         Route::get('update/{id}', 'SalesOrderController@postEdit');
         Route::get('cancelrequest/{id}', 'SalesOrderController@cancelRequest');
+        Route::get('xuat_hang/{id}', 'SalesOrderController@xuatHang');
+        Route::get('shipper_not_go/{id}', 'SalesOrderController@shipperNotGo');
         Route::post('choose_shipper/{id}/{date}', 'SalesOrderController@postShipper');
 
         Route::post('add','SalesOrderController@postAdd' );

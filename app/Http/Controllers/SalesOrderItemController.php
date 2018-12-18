@@ -16,8 +16,9 @@ class SalesOrderItemController extends Controller
         $customers = User::all();
         $staffs = User::all();
         $products= Laptop::all();
+        $laptops= Laptop::all();
         return view('admin.sales_order_item.detail', ['sales_order_items'=>$sale_order_items,'sales_detail'=>$sales_detail,'customers'=>$customers
-            ,'staffs'=>$staffs,'products'=>$products]);
+            ,'staffs'=>$staffs,'products'=>$products, 'laptops'=>$laptops]);
     }
     public function getUpdate($id){
 

@@ -42,6 +42,17 @@ class SalesOrderController extends Controller
         return view('admin.sales_order.shipper', ['sales_orders' => $sales_orders, 'shippers'=>$shippers , 'shippeds'=>$shippeds] );
     }
 
+    public function getSalesOrder(){
+
+        $sales_orders = DB::table('sales_orders')
+            ->join('users as u1', 'u1.id', '=', 'sales_orders.customer_id')
+            ->join('users as u2', 'u2.id', '=', 'sales_orders.staff_confirm')
+            ->where('sales_orders.status', "Đã chọn shipper")
+            ->select('sales_orders.*', 'u1.name as customer_name', 'u2.name as user_name')
+            ->get();
+        return view('admin.sales_order.sale', ['sales_orders' => $sales_orders] );
+    }
+
     public function postShipper(Request $request, $order_id, $date_ship){
         $ship_schedule = new Ship_schedule();
         $ship_schedule->shipper_id = $request->shipper_id;
@@ -162,6 +173,17 @@ class SalesOrderController extends Controller
         $sales_orders->update([
             'status' => $status
         ]);
+        $sales_order_items = DB::table('sales_order_items')->where('sales_order_id', '=',$id)->get();
+        foreach ($sales_order_items as $item){
+            $laptopitem = Laptop::where('id', $item->product_id)->first();
+            $addproduct = $laptopitem->quantity - $item->quantity + $item->quantity_return;
+            $laptop = Laptop::where('id', $item->product_id);
+            $laptop->update([
+                'quantity' => $addproduct
+            ]);
+
+
+        }
         return redirect('admin/sales_order/list')->with('thongbao', 'Xác nhận thành công đơn hàng mã '.$id);
 
     }
@@ -171,8 +193,35 @@ class SalesOrderController extends Controller
         $sales_orders->update([
             'status' => $status
         ]);
+        $sales_order_items = DB::table('sales_order_items')->where('sales_order_id', '=',$id)->get();
+        foreach ($sales_order_items as $item){
+            $laptopitem = Laptop::where('id', $item->product_id)->first();
+            $addproduct = $laptopitem->quantity + $item->quantity ;
+            $laptop = Laptop::where('id', $item->product_id);
+            $laptop->update([
+                'quantity' => $addproduct
+            ]);
+        }
         return redirect('admin/sales_order/list')->with('thongbao', 'Hủy thành công đơn hàng mã '.$id);
 
+    }
+
+    public function xuatHang($id){
+        $sales_orders = Sales_order::where('id', $id);
+        $status = "Đã xuất hàng";
+        $sales_orders->update([
+            'status' => $status
+        ]);
+        return redirect('admin/sales_order/list')->with('thongbao', 'Xuất thành công đơn hàng mã '.$id);
+    }
+
+    public function shipperNotGo($id){
+        $sales_orders = Sales_order::where('id', $id);
+        $status = "Đã xác nhận";
+        $sales_orders->update([
+            'status' => $status
+        ]);
+        return redirect('admin/sales_order/list')->with('thongbao', 'Cập nhật thành công trạng thái đơn hàng mã '.$id);
     }
 
 }

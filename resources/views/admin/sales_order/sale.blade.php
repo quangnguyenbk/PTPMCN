@@ -1,5 +1,5 @@
 <style>
-    th::after {
+    th::after{
         content: "" !important;
     }
 </style>
@@ -17,7 +17,6 @@
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
-
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                 <tr align="center">
@@ -31,7 +30,6 @@
                     <th>Trạng thái</th>
                     <th>Địa chỉ</th>
                     <th>Ngày ship</th>
-                    <th>Shipper</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,30 +45,6 @@
                         <td>{{$item->status}}</td>
                         <td>{{$item->address}}</td>
                         <td>{{$item->date_ship}}</td>
-                        <td>
-                            <form action="admin/sales_order/choose_shipper/{{$item->id}}/{{$item->date_ship}}"
-                                  method="POST">
-                                <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-                                <?php if($item->status == "Đã chọn shipper"):?>
-                                    <?php foreach ($shippeds as $shipped):?>
-                                        <?php if($shipped->order_id == $item->id):?>
-                                            <p>{{$shipped->name}}</p>
-                                        <?php endif ;?>
-                                    <?php endforeach; ?>
-                                <?php else :?>
-                                <select name="shipper_id">
-                                    <option value="0">Chọn shipper</option>
-                                    <?php foreach ($shippers as $shipper):?>
-                                    <option value="<?=  $shipper->id ?>"><?= $shipper->name ?> </option>
-
-                                    <?php endforeach; ?>
-                                </select>
-                                <button style="margin-top: 20px">Save</button>
-                                <?php endif ;?>
-
-
-                            </form>
-                        </td>
                     </tr>
                 @endforeach
                 </tbody>

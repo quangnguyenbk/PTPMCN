@@ -60,6 +60,12 @@ use App\User;
                                 <li>
                                     <a href="admin/sales_order/shiper">Phân công shipper </a>
                                 </li>
+                                <?php $user = Auth::user();
+                                if( $user->hasRole('kho') ){ ?>
+                                <li>
+                                    <a href="admin/sales_order/sale">Xuất hàng </a>
+                                </li>
+                                <?php } ?>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

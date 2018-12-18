@@ -42,7 +42,7 @@
                                 <td>{{$item->customer_name}}</td>
                                 <td>{{$item->user_name}}</td>
                                 <td>{{$item->tax}}</td>
-                                <td>{{$item->create_date}}</td>
+                                <td>{{$item->created_at}}</td>
                                 <td>{{$item->total_money}}</td>
                                 <td>{{$item->comment}}</td>
                                 <td>{{$item->status}}</td>

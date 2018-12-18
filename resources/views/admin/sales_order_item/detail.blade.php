@@ -64,7 +64,7 @@
                         <label>Mô tả</label>
                         <textarea class="form-control" rows="3" name="comment_purchaseoders"><?= $sales_detail->comment ?></textarea>
                     </div>
-                    <?php if($sales_detail->status !=="Đã xác nhận"):?>
+                    <?php if($sales_detail->status =="Mới tạo"):?>
                         <button type="submit" class="btn btn-default">Sửa</button>
                     <?php endif; ?>
                 </form>
@@ -86,8 +86,6 @@
                         <th class="text-center">Số lượng</th>
                         <th class="text-center">Trạng thái</th>
                         <th class="text-center">Comment</th>
-                        <th class="text-center">Số lượng trả lại</th>
-                        <th class="text-center">Lí do</th>
                         <th class="text-center">Xác nhận/Sửa</th>
                     </tr>
                     </thead>
@@ -96,14 +94,16 @@
                         <tr class="odd gradeX" align="center">
                             <td>{{$item->id}}</td>
                             <td>{{$item->sales_order_id}}</td>
-                            <td>{{$item->product_id}}</td>
+                            <?php foreach ($laptops as $laptop) :
+                            if($laptop->id == $item->product_id){ ?>
+                            <td>{{$laptop->laptop_name}}</td>
+                            <?php }
+                            endforeach;?>
                             <td>{{number_format($item->price)}} VNĐ</td>
                             <td>{{$item->discount}}</td>
                             <td>{{$item->quantity}}</td>
                             <td>{{$item->status}}</td>
                             <td>{{$item->comment}}</td>
-                            <td>{{$item->quantity_return}}</td>
-                            <td>{{$item->reason}}</td>
                             <td class="center">
                                 <?php if($item->status != "Đã xác nhận") :?>
                                     <a class="btn btn-default" href="admin/sales_order_item/update/{{$item->id}}">Sửa đơn hàng</a>
@@ -140,10 +140,14 @@
                 </div>
                 <div>
                     <div class="form-group">
-                        <?php if($sales_detail->status !="Đã xác nhận") :?>
+                        <?php $user = Auth::user(); ?>
+                        <?php if($sales_detail->status =="Mới tạo"&& $user->hasRole('quanly')) :?>
                             <label>Xác nhận/Hủy đơn hàng:</label>
                             <a class="btn btn-success" href="admin/sales_order/update/{{$sales_detail->id}}">Xác nhận</a>
                             <a class="btn btn-danger" href="admin/sales_order/cancelrequest/{{$sales_detail->id}}">Hủy đơn hàng</a>
+                            <?php elseif($sales_detail->status =="Đã chọn shipper" && $user->hasRole('kho') ) :?>
+                            <a class="btn btn-success" href="admin/sales_order/xuat_hang/{{$sales_detail->id}}">Xuất hàng</a>
+                            <a class="btn btn-success" href="admin/sales_order/shipper_not_go/{{$sales_detail->id}}">Shipper không đến</a>
                             <?php else :?>
                             <a class="btn btn-danger" href="admin/sales_order/cancelrequest/{{$sales_detail->id}}">Hủy đơn hàng</a>
                         <?php endif ;?>
