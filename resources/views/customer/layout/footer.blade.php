@@ -1,7 +1,6 @@
 <div class="footer">
 
-<script src="/app/services/moduleServices.js"></script>
-<script src="/app/controllers/moduleController.js"></script>
+
     <div class="footer-menu">
         <div class="container">
             <div class="row">
