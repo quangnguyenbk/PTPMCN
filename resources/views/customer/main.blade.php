@@ -1,6 +1,12 @@
 
     @extends('customer.layout.index')
     @section('content') 
+    
+    <script type="text/javascript">
+        function addtoCart( id , name, quantity ){
+            console.log(id);
+        }
+    </script>
     <div class="main">
         <div class="container">
             <div class="row">
@@ -42,17 +48,18 @@
     </nav>
     <div class="product-block clearfix">
         <div class="product-list row">
+            @foreach($laptops as $item)
                 <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
                     <div class="product-item wow pulse">
                         <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
+                            <a href="customer/productDetail/{{$item->id}}" title="{{$item->laptop_name}}">
+                                <img src="{{$item->image}}" data-original="{{$item->image}}" alt="{{$item->laptop_name}}" class="img-responsive lazy-img" />
                             </a>
-                                <span class="promotion">-0%</span>
+                                
                         </div>
                         <div class="right-block">
                             <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
+                                <a href="customer/productDetail/{{$item->id}}" title="{{$item->laptop_name}}">{{$item->laptop_name}}</a>
                             </h2>
                             <div class="rating">
                                 <div class="rating-1">
@@ -61,323 +68,15 @@
                                 </div>
                             </div>
                                     <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
+                                            <span class="price">{{$item->price}}&nbsp;₫</span>
                                     </div>
                                                             <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
+                                    <a class="btn-add-cart" href="customer/addToCart/{{$item->id}}/1" >Thêm vào giỏ</a>
                                 </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 product-resize product-item-box">
-                    <div class="product-item wow pulse">
-                        <div class="image image-resize">
-                            <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">
-                                <img src="/PTPMCN/resources/views/image/acer_1.jpg" data-original="/PTPMCN/resources/views/image/acer_1.jpg" alt="NOKIA ASHA 206 - 2 SIM (CTY)" class="img-responsive lazy-img" />
-                            </a>
-                                <span class="promotion">-0%</span>
-                        </div>
-                        <div class="right-block">
-                            <h2 class="name">
-                                <a href="/san-pham/nokia-asha-206---2-sim-(cty).html" title="NOKIA ASHA 206 - 2 SIM (CTY)">NOKIA ASHA 206 - 2 SIM (CTY)</a>
-                            </h2>
-                            <div class="rating">
-                                <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                </div>
-                            </div>
-                                    <div class="price">
-                                            <span class="price-new">1.369.000&nbsp;₫</span>
-                                            <span class="price-old">1.369.000&nbsp;₫</span>
-                                    </div>
-                                                            <div class="action">
-                                    <a class="btn-add-cart" href="javascript:void(0)" onclick="AddToCard(113727,1)">Mua</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
+            @endforeach
         </div>
     </div>
         <div class="navigation">

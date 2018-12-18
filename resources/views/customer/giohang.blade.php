@@ -26,8 +26,6 @@
         <div class="container">
             <div class="row">
                     <div class="col-md-12">
-<script src="/app/services/orderServices.js"></script>
-<script src="/app/controllers/orderController.js"></script>
 <div class="cart-content" ng-controller="orderController" ng-init="initOrderCartController()">
     <h1><span>Giỏ hàng của tôi</span></h1>
     <div class="steps clearfix">
@@ -51,39 +49,41 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($carts as $item)
                     <tr ng-repeat="item in OrderDetails">
                         <td class="image">
-                            <a href="/san-pham/1.html"> <img ng-src="/PTPMCN/resources/views/image/acer_1.jpg" class="img-responsive" /></a>
+                            <a href="/san-pham/1.html"> <img src="{{$item->image}}" class="img-responsive" /></a>
                         </td>
                         <td class="des">
-                            <h2>Product 1</h2>
-                            <span>name phụ</span>
+                            <h3>{{$item->name}}</h3>
+                            <span>{{$item->name}}</span>
                         </td>
-                        <td class="price">12.000đ</td>
+                        <td class="price">{{number_format($item->price)}}đ</td>
                         <td class="quantity">
-                            <input type="number" value="1" class="text" ng-model="item.Quantity" ng-change="updateItemCart(item)" />
+                            <input type="number" value="{{$item->quantity}}" class="text" />
                         </td>
                         <td class="amount">
-                            15.0000đ
+                            {{number_format($item->total)}}đ
                         </td>
                         <td class="remove">
-                            <a ng-click="removeItemCart(item)" href="javascript:void(0)">
+                            <a ng-click="removeItemCart(item)" href="customer/removeFromCart/{{$item->id}}">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
         <div class="clearfix text-right">
             <span><b>Tổng thanh toán:</b></span>
             <span class="pay-price">
-                0đ
+                {{number_format($total)}}đ
             </span>
         </div>
         <div class="button text-right">
-            <a class="btn btn-default" href="/" onclick="window.history.back()">Tiếp tục mua hàng</a>
-            <a class="btn btn-primary" href="/thanh-toan.html">Tiến hành thanh toán</a>
+            <a class="btn btn-default" href="customer/main">Tiếp tục mua hàng</a>
+            <a class="btn btn-primary" href="customer/thanhtoan">Tiến hành thanh toán</a>
         </div>
     </div>
 </div>

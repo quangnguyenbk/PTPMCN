@@ -109,10 +109,7 @@ class LaptopController extends Controller
     	return back();
     }
 
-    public function getDetail($id){
-    	$laptop = Laptop:: find($id);
-    	return view('customer.productDetail', ['laptop'=>$laptop] );
-    }
+    
 
 
 }

@@ -26,14 +26,14 @@ Route::post('admin/login', 'UserController@postLoginAdmin');
 
 Route::get('admin/logout', 'UserController@getLogout');
 Route::group(['prefix'=>'customer'], function(){
-    Route::get('main', function(){
-        return view('customer.main');
-    });
-    Route::get('giohang', function(){
-        return view('customer.giohang');
-    });
+    Route::get('main', 'MainController@getListLaptop');
+    Route::get('giohang', 'MainController@getListCart');
 
-    Route::get('productDetail/{id}', 'LaptopController@getDetail');
+    Route::get('productDetail/{id}', 'MainController@getDetail');
+    Route::get('addToCart/{id}/{quantity}', 'MainController@addToCart');
+    Route::get('removeFromCart/{id}', 'MainController@removeFromCart');
+    Route::get('thanhtoan', 'MainController@thanhtoan');
+    Route::post('dathang', 'MainController@dathang');
     
 });
 

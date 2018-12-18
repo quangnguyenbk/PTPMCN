@@ -65,29 +65,8 @@
                     </div>
                     <!-- Top Cart -->
                     <div class="col-lg-4 col-sm-12 col-md-4 col-xs-12">
-                        <div class="cart_header">
-                            <a href="/gio-hang.html" title="Giỏ hàng">
-                                <span class="cart_header_icon"></span>
-                                <span class="cart-items">0</span>
-                            </a>
-                            <div class="cart_header_top_box">
-                                    <div class="cart_empty">Giỏ hàng của bạn vẫn chưa có sản phẩm nào.</div>
-                            </div>
-                        </div>
-                        <div class="user_login">
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                                    Tài khoản
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/dang-nhap.html"><i class="fa fa-user-circle"></i> Đăng nhập</a></li>
-                                    <li><a href="/dang-ky.html"><i class="fa fa-plus"></i> Đăng ký</a></li>
-                                </ul>
-                            </div>
-                        </div>
                         <div class="order-tracking">
-                            <a href="/kiem-tra-don-hang.html"><i class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a>
+                            <a href="customer/giohang"></i> Giỏ hàng</a>
                         </div>
                     </div>
                 </div>
@@ -108,7 +87,7 @@
                             </button>
                         </div>
                         <div class="collapse navbar-collapse" id="navbar-top">
-                            <ul class='nav navbar-nav'><li class="level0"><a class='' href='/trang-chu.html'><span>Trang chủ</span></a></li>
+                            <ul class='nav navbar-nav'><li class="level0"><a class='' href='customer/main'><span>Trang chủ</span></a></li>
 <li class="has_child level0"><a class='' href='/san-pham.html'><span>Sản phẩm</span></a><ul class='menu_child level1'><li class="has_child level1"><a class='' href='/content/test.html'><span>test</span></a><ul class='menu_child level2'><li class="level2"><a class='' href='/content/sub_2.html'><span>sub_2</span></a></li>
 <li class="level2"><a class='' href='/san-pham/may-tinh-bang'><span>sub_22</span></a></li>
 </ul class='menu_child level2'></li>

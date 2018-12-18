@@ -11,19 +11,22 @@ class Laptop extends Model
     public $fillable = ['status'];
 
     public function ram(){
-    	return $this->hasMany("App\Ram", "ram","ram_id");
+    	return $this->hasOne("App\Ram", "id","ram");
     }
     public function vga(){
-    	return $this->hasMany("App\Vga", "vga","vga_id");
+    	return $this->hasOne("App\Vga", "id","vga");
     }
     public function cpu(){
-    	return $this->hasMany("App\Cpu", "cpu","cpu_id");
+    	return $this->hasOne("App\Cpu", "id","cpu");
     }
-    public function branch(){
-    	return $this->hasMany("App\Branch", "branch","branch_id");
+    public function brand(){
+    	return $this->hasOne("App\Branch", "id","brand");
     }
     public function monitor(){
-    	return $this->hasMany("App\Monitor", "monitor","monitor_id");
+    	return $this->hasOne("App\Monitor", "id","monitor");
+    }
+    public function harddrive(){
+        return $this->hasOne("App\Harddrive", "id","harddrive");
     }
     public function sales_order_item(){
         return $this->belongsToMany("App\SalesOrderItem");
