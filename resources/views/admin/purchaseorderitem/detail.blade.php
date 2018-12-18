@@ -100,7 +100,7 @@
                 </table>
             </div>
                 <div>
-                    <?php $user = Auth::user();
+                    <?php
                     if( $purchase_detail->status != "Đã duyệt" && $purchase_detail->status != "Đã hủy đơn hàng" ){ ?>
                     <form action="admin/purchaseorderitem/add/<?= $purchase_detail->id ?>" method="POST">
                         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
