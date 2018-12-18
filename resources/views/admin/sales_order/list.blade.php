@@ -30,9 +30,6 @@
                                 <th>Trạng thái</th>
                                 <th>Địa chỉ</th>
                                 <th>Ngày ship</th>
-                                {{--<th>Hủy</th>--}}
-                                {{--<th>Edit</th>--}}
-                                {{--<th>Add Order Detail</th>--}}
                             </tr>
                         </thead>
                         <tbody>
@@ -40,7 +37,15 @@
                             <tr class="odd gradeX" align="center">
                                 <td><a href="admin/sales_order_item/detail/{{$item->id}}}">{{$item->id}}</a></td>
                                 <td>{{$item->customer_name}}</td>
-                                <td>{{$item->user_name}}</td>
+                                <?php if($item->staff_confirm):?>
+                                    <?php foreach ($users as $user) :
+                                        if($user->id == $item->staff_confirm){ ?>
+                                            <td>{{$user->name}}</td>
+                                        <?php }
+                                    endforeach;?>
+                                <?php else :?>
+                                    <td></td>
+                                <?php  endif; ?>
                                 <td>{{$item->tax}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->total_money}}</td>
@@ -48,9 +53,6 @@
                                 <td>{{$item->status}}</td>
                                 <td>{{$item->address}}</td>
                                 <td>{{$item->date_ship}}</td>
-                                {{--<td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/sales_order/delete"> Hủy</a></td>--}}
-                                {{--<td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/sales_order/edit_order/{{$item->id}}">Edit</a></td>--}}
-                                {{--<td class="center"><i class="fa fa-plus fa-fw"></i> <a href="admin/sales_order/add_detail_order/{{$item->id}}">Add Detail</a></td>--}}
                             </tr>
                             @endforeach
                         </tbody>

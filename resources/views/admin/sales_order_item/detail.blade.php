@@ -64,7 +64,7 @@
                         <label>Mô tả</label>
                         <textarea class="form-control" rows="3" name="comment_purchaseoders"><?= $sales_detail->comment ?></textarea>
                     </div>
-                    <?php if($sales_detail->status =="Mới tạo"):?>
+                    <?php if($sales_detail->status =="mới tạo"):?>
                         <button type="submit" class="btn btn-default">Sửa</button>
                     <?php endif; ?>
                 </form>
@@ -141,7 +141,7 @@
                 <div>
                     <div class="form-group">
                         <?php $user = Auth::user(); ?>
-                        <?php if($sales_detail->status =="Mới tạo"&& $user->hasRole('quanly')) :?>
+                        <?php if($sales_detail->status =="mới tạo"&& $user->hasRole('quanly')) :?>
                             <label>Xác nhận/Hủy đơn hàng:</label>
                             <a class="btn btn-success" href="admin/sales_order/update/{{$sales_detail->id}}">Xác nhận</a>
                             <a class="btn btn-danger" href="admin/sales_order/cancelrequest/{{$sales_detail->id}}">Hủy đơn hàng</a>

@@ -9,16 +9,18 @@ use App\User;
 use App\Ship_schedule;
 use App\Laptop;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class SalesOrderController extends Controller
 {
     public function getList(){
 
         $sales_orders = DB::table('sales_orders')
             ->join('users as u1', 'u1.id', '=', 'sales_orders.customer_id')
-            ->join('users as u2', 'u2.id', '=', 'sales_orders.staff_confirm')
-            ->select('sales_orders.*', 'u1.name as customer_name', 'u2.name as user_name')
+//            ->join('users as u2', 'u2.id', '=', 'sales_orders.staff_confirm')
+            ->select('sales_orders.*', 'u1.name as customer_name')
             ->get();
-        return view('admin.sales_order.list', ['sales_orders' => $sales_orders] );
+        $users = User::all();
+        return view('admin.sales_order.list', ['sales_orders' => $sales_orders,'users'=>$users, ] );
     }
 
     public function getShiper(){
@@ -168,10 +170,12 @@ class SalesOrderController extends Controller
 
     }
     public function postEdit($id){
+        $user_id = Auth::id();
         $sales_orders = Sales_order::where('id', $id);
         $status = "Đã xác nhận";
         $sales_orders->update([
-            'status' => $status
+            'status' => $status,
+            'staff_confirm' => $user_id
         ]);
         $sales_order_items = DB::table('sales_order_items')->where('sales_order_id', '=',$id)->get();
         foreach ($sales_order_items as $item){
