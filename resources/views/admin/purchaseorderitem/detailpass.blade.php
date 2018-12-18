@@ -38,7 +38,8 @@
                         <label>Mô tả</label>
                         <textarea class="form-control" rows="3" name="comment_purchaseoders"><?= $purchase_detail->comment ?></textarea>
                     </div>
-                    <?php if($purchase_detail->status != "Hoàn thành" && $purchase_detail->status != "Đã duyệt") {?>
+                    <?php  $user = Auth::user();
+                    if($purchase_detail->status != "Hoàn thành" && $purchase_detail->status != "Đã duyệt" &&   $user->hasRole('kho')) {?>
                     <button type="submit" class="btn btn-default">Sửa</button>
                     <?php } ?>
                 </form>
@@ -80,7 +81,7 @@
                             <td>{{$item->quantity}}</td>
                             <td>{{$item->quantity_return}}</td>
                             <td>{{$item->reason}}</td>
-                            <?php if($item->status != "Đã kiểm tra" && $purchase_detail->status != "Đã duyệt"){ ?>
+                            <?php if($item->status != "Đã kiểm tra" && $purchase_detail->status != "Đã duyệt" &&  $user->hasRole('kho')){ ?>
                             <td class="center">
                                 <a class="btn btn-primary" href="admin/purchaseorderitem/editpass/{{$item->id}}">Kiểm tra</a>
                             </td>
