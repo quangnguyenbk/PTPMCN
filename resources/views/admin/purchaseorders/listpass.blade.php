@@ -1,3 +1,6 @@
+<?php
+use App\User;
+?>
 @extends('admin.layout.index')
 
 @section('content')
@@ -63,7 +66,9 @@
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->status}}</td>
                             <td>{{$item->comment}}</td>
-                            <?php if($item->status == "Đã duyệt"){ ?>
+                            <?php
+                            $user = Auth::user();
+                            if($item->status == "Đã duyệt" && $user->hasRole('kho')){ ?>
                                 <td><a class="btn btn-success" href="admin/purchaseorders/updatepass/{{$item->id}}">Xác nhận đã nhận hàng</a></td>
                             <?php }
                             else { ?>
