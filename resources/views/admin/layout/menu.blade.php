@@ -57,6 +57,9 @@ use App\User;
                                 <li>
                                     <a href="admin/sales_order/add">Thêm </a>
                                 </li>
+                                <li>
+                                    <a href="admin/sales_order/shiper">Phân công shipper </a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
