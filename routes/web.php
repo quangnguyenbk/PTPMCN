@@ -26,7 +26,7 @@ Route::post('admin/login', 'UserController@postLoginAdmin');
 
 Route::get('admin/logout', 'UserController@getLogout');
 Route::group(['prefix'=>'customer'], function(){
-    Route::get('main/{page?}/{column?}/{order?}', 'MainController@getListLaptop');
+    Route::get('main', 'MainController@getListLaptop');
     Route::get('giohang', 'MainController@getListCart');
 
     Route::get('productDetail/{id}', 'MainController@getDetail');

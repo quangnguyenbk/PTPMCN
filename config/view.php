@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'pagination' => 'pagination::slider-3',
+
     /*
     |--------------------------------------------------------------------------
     | View Storage Paths
@@ -31,4 +31,3 @@ return [
     'compiled' => realpath(storage_path('framework/views')),
 
 ];
-

@@ -17,10 +17,8 @@ use App\Sales_order_item;
 use App\Role;
 class MainController extends Controller
 {
-    public function getListLaptop($page = 15, $col = null, $sort = null){
-    	if ($col != null && $sort !=null)
-    		$laptops = DB::table('laptops')->orderBy($col, $sort)->paginate($page);
-    	else $laptops = Laptop::paginate($page);
+    public function getListLaptop(){
+    	$laptops = Laptop::all();
     	return view('customer.main', ['laptops' => $laptops]);
     }
 

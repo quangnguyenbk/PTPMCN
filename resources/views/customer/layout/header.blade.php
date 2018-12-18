@@ -31,7 +31,7 @@
     <section class="header-content clearfix">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-sm-12 col-md-3 col-xs-12">
+                    <div class="col-lg-3 col-sm-12 col-md-3 col-xs-12">
                         <!-- Header Logo -->
                         <a class="logo" href="/"><img alt="" src="/Uploads/shop96/images/logo.png"></a>
                         <!-- End Header Logo -->
@@ -45,14 +45,26 @@
                                         <input type="text" name="search" class="index_input_search" id="txtsearch" onblur="if(this.value=='')this.value='Tìm kiếm...'"
                                                onfocus="if(this.value=='Tìm kiếm...')this.value=''" value="T&#236;m kiếm..." />
                                     </div>
-                                    <button type="button" class="btn-search" id="btnsearch" ><i class="fa fa-search"></i></button>
+                                    <div class="group-collection-search">
+                                        <button type="button" id="dropdown-collection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-groupid="0"><span>Tất cả</span> <i class="fa fa-angle-down"></i></button>
+                                        <ul class="dropdown-menu change-collection-id" aria-labelledby="dropdown-collection">
+                                                <li><a data-collectionid="0" href="javascript:void(0);">Tất cả</a></li>
+                                                <li><a data-collectionid="124074" href="javascript:void(0);">Điện thoại</a></li>
+                                                <li><a data-collectionid="124075" href="javascript:void(0);">M&#225;y t&#237;nh bảng</a></li>
+                                                <li><a data-collectionid="124076" href="javascript:void(0);">Laptop</a></li>
+                                                <li><a data-collectionid="124077" href="javascript:void(0);">M&#225;y để b&#224;n</a></li>
+                                                <li><a data-collectionid="124078" href="javascript:void(0);">Phụ kiện</a></li>
+                                                <li><a data-collectionid="124079" href="javascript:void(0);">M&#225;y cũ</a></li>
+                                        </ul>
+                                    </div>
+                                    <button type="button" class="btn-search" id="btnsearch"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
                         <!-- End Search-col -->
                     </div>
                     <!-- Top Cart -->
-                    <div class="col-lg-3 col-sm-12 col-md-4 col-xs-12">
+                    <div class="col-lg-4 col-sm-12 col-md-4 col-xs-12">
                         <div class="order-tracking">
                             <a href="customer/giohang"></i> Giỏ hàng</a>
                         </div>

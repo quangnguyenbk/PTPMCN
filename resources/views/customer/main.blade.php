@@ -25,22 +25,24 @@
         </ul>
         <div class="limit">
             <span>Sản phẩm/trang</span>
-            <select id="lblimit" name="lblimit" class="nb_item" onchange="window.location.href = 'customer/main/' + this.options[this.selectedIndex].value">
-                        <option value="10">10</option>
-                        <option value="12">12</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="250">250</option>
-                        <option value="500">500</option>
+            <select id="lblimit" name="lblimit" class="nb_item" onchange="window.location.href = this.options[this.selectedIndex].value">
+                        <option value="?limit=10">10</option>
+                        <option selected="selected" value="?limit=12">12</option>
+                        <option value="?limit=20">20</option>
+                        <option value="?limit=50">50</option>
+                        <option value="?limit=100">100</option>
+                        <option value="?limit=250">250</option>
+                        <option value="?limit=500">500</option>
             </select>
         </div>
         <div class="sort">
             <span>Sắp xếp</span>
-            <select class="selectProductSort" id="lbsort" onchange="window.location.href = 'customer/main/10/' + this.options[this.selectedIndex].value">
+            <select class="selectProductSort" id="lbsort" onchange="window.location.href = this.options[this.selectedIndex].value">
                         <option selected="selected" value="?sort=index&amp;order=asc">Mặc định</option>
-                        <option value="laptop_name/asc">T&#234;n sản phẩm: A to Z</option>
-                        <option value="laptop_name/desc">T&#234;n sản phẩm: Z to A</option>
+                        <option value="?sort=price&amp;order=asc">Gi&#225; tăng dần</option>
+                        <option value="?sort=price&amp;order=desc">Gi&#225; giảm dần</option>
+                        <option value="?sort=name&amp;order=asc">T&#234;n sản phẩm: A to Z</option>
+                        <option value="?sort=name&amp;order=desc">T&#234;n sản phẩm: Z to A</option>
             </select>
         </div>
     </nav>
@@ -66,7 +68,7 @@
                                 </div>
                             </div>
                                     <div class="price">
-                                            <span class="price">{{number_format($item->price)}}&nbsp;₫</span>
+                                            <span class="price">{{$item->price}}&nbsp;₫</span>
                                     </div>
                                                             <div class="action">
                                     <a class="btn-add-cart" href="customer/addToCart/{{$item->id}}/1" >Thêm vào giỏ</a>
@@ -79,7 +81,19 @@
     </div>
         <div class="navigation">
             <ul class="pagination">
-                {{ $laptops->links()}}
+                <li>
+                    <a href="?page=1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                        <li class="active"><a href="?page=1">1</a></li>
+                        <li><a href="?page=2">2</a></li>
+                        <li><a href="?page=3">3</a></li>
+                <li>
+                    <a href="?page=3" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
             </ul>
         </div>
                         </section>
