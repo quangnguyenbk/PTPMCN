@@ -1,7 +1,8 @@
 <?php
 
 return [
-
+    
+    'pagination' => 'pagination::slider-3',
     /*
     |--------------------------------------------------------------------------
     | View Storage Paths

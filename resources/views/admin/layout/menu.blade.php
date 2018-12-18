@@ -16,9 +16,6 @@ use App\User;
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
                             <a href="admin/supplier/list"><i class="fa fa-bar-chart-o fa-fw"></i> Nhà cung cấp<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -74,22 +71,10 @@ use App\User;
                             <a href="admin/laptop/list"><i class="fa fa-cube fa-fw"></i> Sản phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin/laptop/list">List Product</a>
+                                    <a href="admin/laptop/list">Danh sách</a>
                                 </li>
                                 <li>
-                                    <a href="admin/laptop/add">Add Product</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">List User</a>
-                                </li>
-                                <li>
-                                    <a href="#">Add User</a>
+                                    <a href="admin/laptop/add">Thêm</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

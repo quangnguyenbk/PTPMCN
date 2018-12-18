@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,25 +9,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
-
-
 Route::group(['prefix'=>'shipper'], function(){
     Route::get('list', 'ShipperController@getList');
     Route::get('done/{id}', 'ShipperController@getDone');
 });
-
 Route::get('admin/login', 'UserController@getLoginAdmin');
 Route::post('admin/login', 'UserController@postLoginAdmin');
-
 Route::get('admin/logout', 'UserController@getLogout');
 Route::group(['prefix'=>'customer'], function(){
-    Route::get('main', 'MainController@getListLaptop');
+    Route::get('main/{page?}/{column?}/{order?}', 'MainController@getListLaptop');
     Route::get('giohang', 'MainController@getListCart');
-
     Route::get('productDetail/{id}', 'MainController@getDetail');
     Route::get('addToCart/{id}/{quantity}', 'MainController@addToCart');
     Route::get('removeFromCart/{id}', 'MainController@removeFromCart');
@@ -36,21 +29,16 @@ Route::group(['prefix'=>'customer'], function(){
     Route::post('dathang', 'MainController@dathang');
     
 });
-
-
 Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
-	Route::group(['prefix'=>'supplier'], function(){
-		Route::get('list', 'SupplierController@getList');
-		Route::get('add', 'SupplierController@getAdd');
-		Route::post('add','SupplierController@postAdd' );
-
-		Route::get('update/{id}', 'SupplierController@getUpdate');
-		Route::post('update/{id}', 'SupplierController@postUpdate');
-
-		Route::get('delete/{id}', 'SupplierController@getDelete');
-	
-	});
-
+    Route::group(['prefix'=>'supplier'], function(){
+        Route::get('list', 'SupplierController@getList');
+        Route::get('add', 'SupplierController@getAdd');
+        Route::post('add','SupplierController@postAdd' );
+        Route::get('update/{id}', 'SupplierController@getUpdate');
+        Route::post('update/{id}', 'SupplierController@postUpdate');
+        Route::get('delete/{id}', 'SupplierController@getDelete');
+    
+    });
     Route::group(['prefix'=>'laptop'], function(){
         Route::get('list', 'LaptopController@getList');
         Route::get('add', 'LaptopController@getAdd');
@@ -61,7 +49,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
         Route::post('update/{id}','LaptopController@postUpdate' );
         Route::get('change/{id}', 'LaptopController@getChange');
     });
-
     Route::group(['prefix'=>'purchaseorders'], function(){
         Route::get('list','PurchaseOrderController@getList');
         Route::get('listpass','PurchaseOrderController@getListPass');
@@ -84,7 +71,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
         Route::post('add/{id}','PurchaseOrderItemController@postAdd' );
         Route::get('change/{id}', 'PurchaseOrderItemController@change');
         Route::get('cancelrequest/{id}', 'PurchaseOrderItemController@cancelrequest');
-
     });
     Route::group(['prefix'=>'sales_order'], function(){
         Route::get('list', 'SalesOrderController@getList');
@@ -100,7 +86,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
         Route::get('xuat_hang/{id}', 'SalesOrderController@xuatHang');
         Route::get('shipper_not_go/{id}', 'SalesOrderController@shipperNotGo');
         Route::post('choose_shipper/{id}/{date}', 'SalesOrderController@postShipper');
-
         Route::post('add','SalesOrderController@postAdd' );
         Route::post('edit_order/{id}', 'SalesOrderController@postEditOrder');
         Route::post('edit_detail_order/{id}', 'SalesOrderController@postEditDetailOrder');
@@ -113,9 +98,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
         Route::post('update/{id}','SalesOrderItemController@postUpdate');
         Route::post('add/{id}','SalesOrderItemController@postAdd' );
         Route::get('change/{id}', 'SalesOrderItemController@change');
-
     });
-
 });
 Route::get('/clear-cache', function() {
     return Artisan::call('cache:clear');
