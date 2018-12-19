@@ -31,7 +31,7 @@ use App\User;
                             <a href="#"><i class="fa fa-cube fa-fw"></i>Đơn hàng nhập<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin/purchaseorders/list">Danh sách yêu cầu nhập hàng</a>
+                                    <a href="admin/purchaseorders/list">Danh sách</a>
                                 </li>
                                 <?php $user = Auth::user();
                                 if( $user->hasRole('kho') ){ ?>
