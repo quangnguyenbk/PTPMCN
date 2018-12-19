@@ -64,7 +64,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function(){
     Route::group(['prefix'=>'purchaseorderitem'], function(){
         Route::get('detail/{id}','PurchaseOrderItemController@getItems');
         Route::get('detailpass/{id}','PurchaseOrderItemController@getItemsPass');
-        Route::get('update/{id}','PurchaseOrderItemController@getUpdatePass');
+        Route::get('update/{id}','PurchaseOrderItemController@getUpdate');
         Route::get('editpass/{id}','PurchaseOrderItemController@getUpdatePass');
         Route::post('update/{id}','PurchaseOrderItemController@postUpdate');
         Route::post('editpass/{id}','PurchaseOrderItemController@postUpdatePass');
