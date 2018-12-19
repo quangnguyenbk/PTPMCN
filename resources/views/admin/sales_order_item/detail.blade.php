@@ -117,6 +117,7 @@
                 <div>
                     <form action="admin/sales_order_item/add/<?= $sales_detail->id ?>" method="POST">
                         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+                        <?php if($sales_detail->status =="mới tạo") :?>
                         <label>Thêm chi tiết đơn hàng :</label>
                         <div><p></p></div>
                         <div class="foreground">
@@ -132,6 +133,7 @@
                         <div id="showbtn">
 
                         </div>
+                        <?php endif; ?>
 
                     </form>
                 </div>
@@ -148,6 +150,8 @@
                             <?php elseif($sales_detail->status =="Đã chọn shipper" && $user->hasRole('kho') ) :?>
                             <a class="btn btn-success" href="admin/sales_order/xuat_hang/{{$sales_detail->id}}">Xuất hàng</a>
                             <a class="btn btn-success" href="admin/sales_order/shipper_not_go/{{$sales_detail->id}}">Shipper không đến</a>
+                            <?php elseif($sales_detail->status =="Đã xuất hàng" || $sales_detail->status =="Đã hủy đơn hàng" ) :?>
+                            <p> </p>
                             <?php else :?>
                             <a class="btn btn-danger" href="admin/sales_order/cancelrequest/{{$sales_detail->id}}">Hủy đơn hàng</a>
                         <?php endif ;?>

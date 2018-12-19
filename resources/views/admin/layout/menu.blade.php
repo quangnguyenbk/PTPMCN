@@ -48,12 +48,15 @@ use App\User;
                         <li>
                             <a href="admin/sales_order/list"><i class="fa fa-bar-chart-o fa-fw"></i> Đơn hàng xuất<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="admin/sales_order/list">Danh sách</a>
-                                </li>
-                                <li>
-                                    <a href="admin/sales_order/shiper">Phân công shipper </a>
-                                </li>
+                                <?php $user = Auth::user();
+                                if( $user->hasRole('quanly') ){ ?>
+                                    <li>
+                                        <a href="admin/sales_order/list">Danh sách</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/sales_order/shiper">Phân công shipper </a>
+                                    </li>
+                                <?php } ?>
                                 <?php $user = Auth::user();
                                 if( $user->hasRole('kho') ){ ?>
                                 <li>
