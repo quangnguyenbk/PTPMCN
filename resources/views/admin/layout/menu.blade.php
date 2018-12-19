@@ -28,7 +28,7 @@ use App\User;
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-cube fa-fw"></i>Nhập hàng<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-cube fa-fw"></i>Đơn hàng nhập<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="admin/purchaseorders/list">Danh sách yêu cầu nhập hàng</a>
