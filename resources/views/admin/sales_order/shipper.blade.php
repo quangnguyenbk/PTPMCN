@@ -65,7 +65,7 @@
 
                                     <?php endforeach; ?>
                                 </select>
-                                <button style="margin-top: 20px">Save</button>
+                                <button style="margin-top: 20px" class="btn btn-default">Save</button>
                                 <?php endif ;?>
 
 

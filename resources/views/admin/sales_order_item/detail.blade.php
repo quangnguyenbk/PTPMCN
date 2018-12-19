@@ -79,11 +79,11 @@
                     <thead>
                     <tr align="center">
                         <th class="text-center">ID</th>
-                        <th class="text-center">Mã hóa đơn</th>
+                        <th class="text-center">Mã đơn hàng</th>
                         <th class="text-center">Tên sản phẩm</th>
                         <th class="text-center">Giá</th>
-                        <th class="text-center">Khuyến mại</th>
                         <th class="text-center">Số lượng</th>
+                        <th class="text-center">Số lượng tồn kho</th>
                         <th class="text-center">Trạng thái</th>
                         <th class="text-center">Comment</th>
                         <th class="text-center">Xác nhận/Sửa</th>
@@ -94,14 +94,15 @@
                         <tr class="odd gradeX" align="center">
                             <td>{{$item->id}}</td>
                             <td>{{$item->sales_order_id}}</td>
-                            <?php foreach ($laptops as $laptop) :
-                            if($laptop->id == $item->product_id){ ?>
-                            <td>{{$laptop->laptop_name}}</td>
-                            <?php }
-                            endforeach;?>
+                            <?php foreach ($laptops as $laptop) :?>
+                                <?php if($laptop->id == $item->product_id) :?>
+                                <?php $quantity = $laptop->quantity - $item->quantity ?>
+                                <td>{{$laptop->laptop_name}}</td>
+                                <?php endif ;?>
+                            <?php endforeach;?>
                             <td>{{number_format($item->price)}} VNĐ</td>
-                            <td>{{$item->discount}}</td>
                             <td>{{$item->quantity}}</td>
+                            <td>{{$quantity}}</td>
                             <td>{{$item->status}}</td>
                             <td>{{$item->comment}}</td>
                             <td class="center">
