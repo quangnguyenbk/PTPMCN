@@ -16,7 +16,8 @@ class SalesOrderController extends Controller
 
         $sales_orders = DB::table('sales_orders')
             ->join('users as u1', 'u1.id', '=', 'sales_orders.customer_id')
-//            ->join('users as u2', 'u2.id', '=', 'sales_orders.staff_confirm')
+            ->where('sales_orders.status', "mới tạo")
+            ->orWhere('sales_orders.status', "Đã hủy đơn hàng")
             ->select('sales_orders.*', 'u1.name as customer_name')
             ->get();
         $users = User::all();
