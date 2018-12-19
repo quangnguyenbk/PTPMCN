@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="action">
-                        <a href="javascript:void(0)" class="btn-add-cart" ><i class="glyphicon glyphicon-shopping-cart"></i> Thêm giỏ hàng</a>
+                        <a href="customer/addToCart/{{$laptop->id}}/1" class="btn-add-cart" ><i class="glyphicon glyphicon-shopping-cart"></i> Thêm giỏ hàng</a>
                     </div>
                     @else
                     <div class="action" >

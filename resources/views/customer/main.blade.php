@@ -67,9 +67,16 @@
                                     <div class="price">
                                             <span class="price">{{number_format($item->price)}}&nbsp;₫</span>
                                     </div>
-                                                            <div class="action">
+                                    @if( $item->quantity > 0)
+                                    <div class="action">
                                     <a class="btn-add-cart" href="customer/addToCart/{{$item->id}}/1" >Thêm vào giỏ</a>
-                                </div>
+                                    </div>
+                                    @else
+                                    <div class="action" >
+                                    <button class="btn btn-primary" <i class="glyphicon glyphicon-shopping-cart"></i> Hết hàng</button>
+                                    </div>
+                                    @endif
+                    
                         </div>
                     </div>
                 </div>

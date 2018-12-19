@@ -8,7 +8,7 @@
 <div class="breadcrumb clearfix">
     <ul>
                     <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="home">
-                        <a title="Đến trang chủ" href="/" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                        <a title="Đến trang chủ" href="customer/main" itemprop="url"><span itemprop="title">Trang chủ</span></a>
                     </li>
                     <li class="icon-li"><strong>Giỏ hàng</strong> </li>
     </ul>
