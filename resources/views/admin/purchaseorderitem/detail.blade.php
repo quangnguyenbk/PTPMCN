@@ -135,7 +135,7 @@
                             <a class="btn btn-primary" href="admin/purchaseorders/update/{{$purchase_detail->id}}">Gửi đề xuất</a>
                                 <?php } ?>
                                 <?php $user = Auth::user();
-                                if( $user->hasRole('quanly') ){ ?>
+                                if( $user->hasRole('quanly')&& $purchase_detail->status == "Đã đề xuất"){ ?>
                                 <a class="btn btn-success" href="admin/purchaseorders/approve/{{$purchase_detail->id}}">Duyệt đơn hàng</a>
                                 <?php } ?>
                             <a class="btn btn-danger" href="admin/purchaseorders/cancelrequest/{{$purchase_detail->id}}">Hủy đơn hàng</a>

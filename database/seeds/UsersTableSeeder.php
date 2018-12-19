@@ -40,6 +40,13 @@ class UsersTableSeeder extends Seeder
         $shipper->save();
         $shipper->roles()->attach($role_shipper);
 
+        $shipper = new User();
+        $shipper->name = 'Trang';
+        $shipper->email = 'shipper02@gmail.com';
+        $shipper->password = bcrypt('12345678');
+        $shipper->save();
+        $shipper->roles()->attach($role_shipper);
+
         $customer = new User();
         $customer->name = 'Chi';
         $customer->email = 'khachhang01@gmail.com';
